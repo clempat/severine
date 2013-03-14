@@ -1,1 +1,56 @@
-@import "bootstrap_and_overrides.less";
+@import '../../../lib/bootstrap/less/variables';
+@import '../../../lib/bootstrap/less/mixins';
+@import 'mixins';
+
+nav {
+  .navbar-inner {
+    padding: 20px 0 10px;
+    a.brand {
+      padding: 10px 20px 0;
+    }
+    a {
+      font-size: 20px;
+    }
+  }
+}
+.carousel-inner {
+  .item
+  {
+
+    img {
+      width:60%;
+      display: inline-block;
+    }
+    .text-header {
+      margin-left: -4px;
+      display: inline-block;
+      background-color: #f2f2f2;
+      width: 38%;
+      padding: 1%;
+      vertical-align: middle;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      p {
+        text-align: justify;
+      }
+      .p_wrapper {
+        position: absolute;
+        top: 80px;
+        bottom: 70px;
+        left: 10px;
+        right: 20px;
+        overflow: hidden;
+        .p_ellipsis
+      }
+      a {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+      }
+
+    }
+  }
+}
+
+
