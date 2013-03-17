@@ -2,6 +2,15 @@
 /**
  * Created by JetBrains PhpStorm.
  * User: clementpatout
+ * Date: 15.03.13
+ * Time: 14:38
+ * To change this template use File | Settings | File Templates.
+ */
+?>
+<?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: clementpatout
  * Date: 12.03.13
  * Time: 15:21
  * To change this template use File | Settings | File Templates.
@@ -31,23 +40,19 @@
     <meta name="og:email" content="s_lenglet@yahoo.fr"/>
 
     <title>
-        <?php if (!isset($page_title)) {
-        echo "Séverine Lenglet - Journalist, Filmmaker, Video Trainer";
-    } else {
-        echo $page_title;
-    } ?>
+        <?php if (!isset($title_for_layout)) {
+            echo "Séverine Lenglet - Journalist, Filmmaker, Video Trainer";
+        } else {
+            echo $title_for_layout;
+        } ?>
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
-    <link href="<?php echo site_url('assets/css/bootstrap_and_overrides.css')?>" rel="stylesheet" media="screen">
-    <link href="<?php echo site_url('assets/css/application.css')?>" rel="stylesheet" media="screen">
+    <?php echo $css_for_layout ?>
 
     <!-- JAVASCRIPT -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="<?php echo site_url('assets/js/jquery.dotdotdot-1.5.6.js') ?>"></script>
-    <script src="<?php echo site_url('assets/js/bootstrap.js') ?>"></script>
-    <script src="<?php echo site_url('assets/js/application.js') ?>"></script>
+    <?php echo $js_for_layout ?>
 
 </head>
 <body>
@@ -74,5 +79,9 @@
         </div>
     </div>
 </nav>
+<?php echo flash_message() ?>
+<?php echo $content_for_layout?>
 
+</body>
+</html>
 
