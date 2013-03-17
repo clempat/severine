@@ -42,6 +42,7 @@ $route['default_controller'] = "pages/view";
 $route['home'] = 'pages/view/home';
 $route['contact'] = 'pages/view/contact';
 $route['about'] = 'pages/view/about';
+$route['admin'] = 'admin/pages';
 $route['404_override'] = '';
 
 

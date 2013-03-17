@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-echo form_open('admin/login');
+echo form_open('admin/pages/login');
 echo form_label('Login','username');
 echo form_input('username',set_value('username'));
 

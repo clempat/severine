@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class Pages extends CI_Controller {
+class Pages extends MY_Controller {
     public function view($page='home')
     {
         if ( ! file_exists('application/views/pages/'.$page.'.php'))
@@ -15,12 +15,9 @@ class Pages extends CI_Controller {
             show_404();
         }
 
-        $data['page'] = "Séverine Lenglet : ".ucfirst($page);
+        $this->layout->title("Séverine Lenglet : ".ucfirst($page));
 
-
-
-        $this->load->view('layouts/header', $data);
-        $this->load->view('pages/'.$page, $data);
-        $this->load->view('layouts/footer', $data);
+        $data = array();
+        $this->layout->view("pages/".$page, $data);
     }
 }
