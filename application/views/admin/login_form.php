@@ -6,15 +6,19 @@
  * Time: 21:03
  * To change this template use File | Settings | File Templates.
  */
+?>
 
-echo form_open('admin/pages/login');
-echo form_label('Login','username');
-echo form_input('username',set_value('username'));
+<section id="page" class="container-fluid">
+    <h2>Login</h2>
+    <?php echo form_open(site_url('admin/pages/login'), array('class' => 'form-horizontal')) ?>
 
-echo form_label('Mot de passe','password');
-echo form_password('password');
+    <?php echo $this->form_builder->text('username', 'Login') ?>
 
-echo form_submit('submit','Connexion');
-echo form_close();
-echo validation_errors();
-echo $error_credentials;
+
+    <?php echo $this->form_builder->password('password', 'Mot de passe') ?>
+
+    <?php echo form_submit('submit','Connexion');?>
+    <?php echo form_close(); ?>
+    <?php echo validation_errors();?>
+
+</section>

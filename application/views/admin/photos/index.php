@@ -17,8 +17,8 @@
                 <p>
                 <h3><?php echo $photo->title ?></h3>
                 <div class="btn-group text-center">
-                    <a href="photos/crop/<?php echo $photo->id ?>" class="btn">Editer</a>
-                    <a href="photos/dell/<?php echo $photo->id ?>" class="btn btn-danger">Supprimer</a>
+                    <a href="<?php echo site_url('admin/photos/crop/'.$photo->id) ?>" class="btn">Editer</a>
+                    <a href="<?php echo site_url('admin/photos/dell/'.$photo->id ) ?>" class="btn btn-danger">Supprimer</a>
                 </div>
                 </p>
             </div>
