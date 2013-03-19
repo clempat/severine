@@ -20,7 +20,6 @@
         (object) array('id'=>'german', 'name'=>'Allemand')
     )); ?>
         <?php echo $this->form_builder->text('url', 'Url'); ?>
-    <?php echo $this->form_builder->hidden('video_thumbnails') ?>
     <div id="video_photos">
         <h3>Choix Photo: <small><a href="<?php echo site_url('admin/photos') ?>">Gerer la bibliothèque</a></small> </h3>
         <ol class="selectable thumbnails">

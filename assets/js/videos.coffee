@@ -1,4 +1,14 @@
 $(document).ready ->
+  $('.sortable').sortable
+    stop: (event, ui) ->
+      i=0
+      data={}
+      $('.video').each ->
+        data[i]= $(this).attr('id')
+        i++
+      $.post('videos/sort', {'sort':data})
+  value = $('#photo_id').val()
+  $('#'+value).addClass('ui-selected click-selected')
   $('.selectable').selectable
     filter: 'li'
     selected: (event, ui) ->

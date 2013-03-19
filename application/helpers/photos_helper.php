@@ -66,10 +66,7 @@ function get_filename($photo) {
 ############################
 function get_main_color($photo) {
 
-    $rTotal = 0;
-    $gTotal = 0;
-    $bTotal =0;
-    $total = 0;
+    $rTotal = 0;$gTotal = 0;$bTotal =0;$total = 0;
 
     $i = imagecreatefromjpeg($photo['full_path']);
     for ($x=imagesx($i)-10;$x<imagesx($i);$x++) {
@@ -102,4 +99,59 @@ function text_color($r,$g,$b) {
     $color = "rgb(".$new_r.",".$new_g.",".$new_b.")";
 
     return $color;
+}
+
+function autoCrop($photo) {
+    $image_path = "./uploads/".get_filename($photo);
+
+    $jpg = imagecreatefromjpeg($image_path);
+    $black = array("red" => 60, "green" => 60, "blue" => 60, "alpha" => 0);
+
+    $removeTop = 0;
+    for($y = 0; $y < imagesy($jpg); $y++) {
+        $rTotal = 0;$gTotal = 0;$bTotal =0;$total = 0;
+        for($x = 0; $x < imagesx($jpg); $x++) {
+            $rgb = imagecolorat($jpg,$x,$y);
+            $r   = ($rgb >> 16) & 0xFF;
+            $g   = ($rgb >> 8)  & 0xFF;
+            $b   = $rgb & 0xFF;
+            $rTotal += $r;
+            $gTotal += $g;
+            $bTotal += $b;
+            $total++;
+        }
+        $color = array("red" => round($rTotal/$total), "green" => round($gTotal/$total), "blue" => round($bTotal/$total), "alpha" => 0);
+        if($color["red"] > $black["red"] || $color["green"] > $black["green"] || $color["blue"] > $black["blue"] ) {break;}
+        $removeTop += 1;
+    }
+
+    $removeBottom = 0;
+    for($y = imagesy($jpg)-1; $y > 0; $y--) {
+        $rTotal = 0;$gTotal = 0;$bTotal =0;$total = 0;
+        for($x = 0; $x < imagesx($jpg); $x++) {
+            $rgb = imagecolorat($jpg,$x,$y);
+            $r   = ($rgb >> 16) & 0xFF;
+            $g   = ($rgb >> 8)  & 0xFF;
+            $b   = $rgb & 0xFF;
+            $rTotal += $r;
+            $gTotal += $g;
+            $bTotal += $b;
+            $total++;
+        }
+        $color = array("red" => round($rTotal/$total), "green" => round($gTotal/$total), "blue" => round($bTotal/$total), "alpha" => 0);
+        if($color["red"] > $black["red"] || $color["green"] > $black["green"] || $color["blue"] > $black["blue"] ) {break;}
+        $removeBottom += 1;
+    }
+    $height = imagesy($jpg)-($removeBottom+$removeTop);
+
+    $CI =& get_instance();
+    $config = array (
+        'source_image' => $image_path,
+        'y_axis' => $removeTop,
+        'height' => $height
+
+    );
+    $CI->image_lib->initialize($config);
+    $CI->image_lib->crop();
+    return true;
 }

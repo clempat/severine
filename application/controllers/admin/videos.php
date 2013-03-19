@@ -13,6 +13,7 @@ class Videos extends MY_Controller {
         $this->load->model('User');
         $this->load->model('Video');
         $this->load->model('Photo');
+        $this->layout->js('assets/js/videos.js');
 
         if(!$this->User->isLoggedIn()){
             redirect ('admin/pages/login', 'refresh');
@@ -27,14 +28,25 @@ class Videos extends MY_Controller {
         }
     }
     function edit($id) {
+        if ($this->input->post('valid')) {
+            if ($this->Video->edit($id)) {
+                redirect('admin/videos', 'refresh');
+            }
 
-        $this->layout->view('admin/videos/edit');
+        }
+
+        $this->layout->js('assets/js/videos.js');
+        $data['photos'] = $this->Photo->get_all();
+        $data["video"]=$this->Video->get_video($id);
+        $this->layout->view('admin/videos/edit', $data);
 
     }
-    function show($id) {
+    function sort() {
+        $this->Video->sorted();
 
     }
     function index() {
+
         $data['videos']=$this->Video->get_all();
         foreach ($data['videos'] as &$video) {
             if ($video->photo_id != 0) {
@@ -43,7 +55,6 @@ class Videos extends MY_Controller {
                 $video->r = $photo->r;
                 $video->g = $photo->g;
                 $video->b = $photo->b;
-                print_r($video);
             }
         }
         $this->layout->view('admin/videos/index', $data);
@@ -51,12 +62,10 @@ class Videos extends MY_Controller {
     function add() {
         if ($this->input->post('add')) {
             if ($this->Video->create()) {
-
+                redirect('admin/videos', 'refresh');
             }
 
         }
-        $this->layout->js('assets/js/purl.js');
-        $this->layout->js('assets/js/videos.js');
         $data['photos'] = $this->Photo->get_all();
         $this->layout->view('admin/videos/new', $data);
     }

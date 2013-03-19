@@ -2,6 +2,23 @@
 (function() {
 
   $(document).ready(function() {
+    var value;
+    $('.sortable').sortable({
+      stop: function(event, ui) {
+        var data, i;
+        i = 0;
+        data = {};
+        $('.video').each(function() {
+          data[i] = $(this).attr('id');
+          return i++;
+        });
+        return $.post('videos/sort', {
+          'sort': data
+        });
+      }
+    });
+    value = $('#photo_id').val();
+    $('#' + value).addClass('ui-selected click-selected');
     return $('.selectable').selectable({
       filter: 'li',
       selected: function(event, ui) {
