@@ -11,10 +11,9 @@
     <h2>Liste des Vidéos :</h2>
     <ul class="thumbnails">
         <?php foreach($videos as $video) {?>
-            <?php $thumbnail = ($video->photo_id != 0)? $video->filename : $video->thumbnail ?>
             <li class="span4">
                 <div class="thumbnail" style="background-color: <?php echo 'rgb('.$video->r.','.$video->g.','.$video->b.')' ?>; color: <?php echo text_color($video->r,$video->g,$video->b); ?>">
-                    <img src="<?php echo site_url('uploads/thumbs/'.$thumbnail).'?'.now()?>" alt="<?php echo $video->title ?>">
+                    <img src="<?php echo site_url('uploads/thumbs/'.$video->thumbnail).'?'.now()?>" alt="<?php echo $video->title ?>">
                     <p>
                     <h3><?php echo $video->title ?></h3>
                     </p>

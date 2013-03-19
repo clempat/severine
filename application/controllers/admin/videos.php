@@ -12,6 +12,8 @@ class Videos extends MY_Controller {
         parent::__construct();
         $this->load->model('User');
         $this->load->model('Video');
+        $this->load->model('Photo');
+
         if(!$this->User->isLoggedIn()){
             redirect ('admin/pages/login', 'refresh');
         }
@@ -34,7 +36,16 @@ class Videos extends MY_Controller {
     }
     function index() {
         $data['videos']=$this->Video->get_all();
-
+        foreach ($data['videos'] as &$video) {
+            if ($video->photo_id != 0) {
+                $photo = $this->Photo->get_photo($video->photo_id);
+                $video->thumbnail = $photo->filename;
+                $video->r = $photo->r;
+                $video->g = $photo->g;
+                $video->b = $photo->b;
+                print_r($video);
+            }
+        }
         $this->layout->view('admin/videos/index', $data);
     }
     function add() {
@@ -46,7 +57,6 @@ class Videos extends MY_Controller {
         }
         $this->layout->js('assets/js/purl.js');
         $this->layout->js('assets/js/videos.js');
-        $this->load->model('Photo');
         $data['photos'] = $this->Photo->get_all();
         $this->layout->view('admin/videos/new', $data);
     }

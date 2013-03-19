@@ -76,9 +76,9 @@ class Photo extends CI_Model {
                 'b' => $color['b']
             );
             //CREATE Header
-            $this->create_header($data);
+            create_header($data);
             //CREATE THUMB
-            $this->create_thumbnail($data);
+            create_thumbnail($data);
 
 
             if ($this->db->insert('photos', $data)){
@@ -129,7 +129,7 @@ class Photo extends CI_Model {
         }
 
         //CREATE THUMB
-        $this->create_thumbnail($photo);
+        create_thumbnail($photo);
 
         return true;
 
@@ -148,54 +148,4 @@ class Photo extends CI_Model {
 
     }
 
-
-
-    ##########PRIVATE FUNCTIONS
-    ############################
-    private function create_thumbnail($photo){
-        $filename = $this->get_filename($photo);
-
-        $config = array(
-            'source_image'=>$this->photos_path.'header/'.$filename,
-            'new_image' =>  $this->photos_path.'thumbs/'.$filename,
-            'width' => 300,
-            'height' => 200,
-            'maintain_ratio'=> true,
-            'quality' => '100%'
-        );
-        $this->image_lib->initialize($config);
-        if (!$this->image_lib->resize())
-        {
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
-            return false;
-        } else { return true;}
-    }
-    private function create_header($photo){
-        $filename = $this->get_filename($photo);
-
-        $config = array (
-            'source_image' => $this->photos_path.$filename,
-            'new_image' => $this->photos_path.'header/'.$filename,
-            'maintain_ratio' => false,
-            'width' => 900,
-            'height' => 600
-        );
-        $this->image_lib->initialize($config);
-        if (!$this->image_lib->resize())
-        {
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
-            return false;
-        } else { return true;}
-    }
-    private function get_filename($photo) {
-        if (is_object($photo )) {
-            $filename = $photo->filename;
-        }
-        elseif (is_array($photo)){
-            $filename = $photo['filename'];
-        } else {
-            return false;
-        }
-        return $filename;
-    }
 }

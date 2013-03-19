@@ -14,7 +14,6 @@ class Video extends CI_Model {
         $this->photos_path = './uploads/';
         $this->now = date("Y-m-d H:i:s");
         $this->load->library('image_lib');
-
     }
     ##########DELETE
     ############################
@@ -22,12 +21,12 @@ class Video extends CI_Model {
         //delete FILE
         $video=$this->get_video($id);
 
-        unlink( $this->photos_path.'thumbs/'.$video->thumbnail);
-        unlink( $this->photos_path.'header/'.$video->thumbnail);
+        if ($video->thumbnail != ''){
+            unlink( $this->photos_path.'thumbs/'.$video->thumbnail);
+            unlink( $this->photos_path.'header/'.$video->thumbnail);
+        }
 
-        if($this->db->delete('videos', array('id' => $id))){
-            return true;
-        } else {return false;}
+        return $this->db->delete('videos', array('id' => $id));
     }
     #Add Video
     function create() {
@@ -55,9 +54,7 @@ class Video extends CI_Model {
 
 
 
-        if ($this->db->insert('videos',$data)) {
-            return true;
-        } else {echo 'oups';}
+        return $this->db->insert('videos',$data);
     }
 
     #edit
@@ -111,69 +108,27 @@ class Video extends CI_Model {
                     $thumbnail = $hash[0]['thumbnail_large'];
                 break;
             }
+            if (isset($thumbnail)) {
+                //UPLOAD THUMBNAILS
+                $filename = $this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
+                file_put_contents($this->photos_path.$filename, file_get_contents($thumbnail));
+                $data['filename']=$filename;
 
-            //UPLOAD THUMBNAILS
-            $filename = $this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
-            file_put_contents($this->photos_path.$filename, file_get_contents($thumbnail));
-            $data['filename']=$filename;
+                create_thumbnail($data);
+                create_header($data);
+                unlink( $this->photos_path.$filename);
 
-            $this->create_thumbnail($data);
-            $this->create_header($data);
-            unlink( $this->photos_path.$filename);
+                return $filename;
+            }
+            return '';
 
-            return $filename;
         }
 
     }
-###PRIVATE FUNCTION
-#######################
-    private function create_thumbnail($photo){
-        $filename = $this->get_filename($photo);
 
-        $config = array(
-            'source_image'=>$this->photos_path.$filename,
-            'new_image' =>  $this->photos_path.'thumbs/'.$filename,
-            'width' => 300,
-            'height' => 200,
-            'maintain_ratio'=> false,
-            'quality' => '100%'
-        );
-        $this->image_lib->initialize($config);
-        if (!$this->image_lib->resize())
-        {
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
-            return false;
-        } else { return true;}
-    }
-    private function create_header($photo){
-        $filename = $this->get_filename($photo);
+    ###PRIVATE FUNCTION
+    #######################
 
-        $config = array (
-            'source_image' => $this->photos_path.$filename,
-            'new_image' => $this->photos_path.'header/'.$filename,
-            'maintain_ratio' => false,
-            'width' => 900,
-            'height' => 600
-        );
-        $this->image_lib->initialize($config);
-        if (!$this->image_lib->resize())
-        {
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
-            return false;
-        } else { return true;}
-    }
-
-    private function get_filename($photo) {
-        if (is_object($photo )) {
-            $filename = $photo->filename;
-        }
-        elseif (is_array($photo)){
-            $filename = $photo['filename'];
-        } else {
-            return false;
-        }
-        return $filename;
-    }
     private function addhttp($url) {
         if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
             $url = "http://" . $url;
