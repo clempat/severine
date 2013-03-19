@@ -37,9 +37,9 @@ class User_model extends CI_Model {
     }
 
     private function updateData($user) {
-        $last_sign_in_at = $user['current_sign_in_at'];
-        $last_sign_in_ip = $user['last_sign_in_ip'];
-        $id = $user['id'];
+        $last_sign_in_at = $user->current_sign_in_at;
+        $last_sign_in_ip = $user->last_sign_in_ip;
+        $id = $user->id;
 
         $now = date("Y-m-d H:i:s");
         $ip = $this->input->ip_address();
@@ -50,7 +50,7 @@ class User_model extends CI_Model {
             'last_sign_in_ip' => $last_sign_in_ip,
             'current_sign_in_at' => $now,
             'current_sign_in_ip' => $ip,
-            'sign_in_count' => $user['sign_in_count']+1
+            'sign_in_count' => $user->sign_in_count+1
         );
 
         $this->db->where('id',$id);

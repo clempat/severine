@@ -17,6 +17,7 @@ class MY_Controller extends CI_Controller {
 
         $this->layout->js('assets/js/jquery-1.9.1.js');
         $this->layout->js('assets/js/jquery.dotdotdot-1.5.6.js');
+        $this->layout->js('assets/js/jquery-ui-1.10.2.custom.js');
         $this->layout->js('assets/js/bootstrap.js');
         $this->layout->js('assets/js/application.js');
 
