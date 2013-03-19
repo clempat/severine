@@ -28,7 +28,8 @@ class Video extends CI_Model {
 
         return $this->db->delete('videos', array('id' => $id));
     }
-    #Add Video
+    ##########CREATE
+    ############################
     function create() {
         //GET Thumbnails
         $thumbnail = $this->get_thumbnail($_POST['url']);
@@ -57,14 +58,49 @@ class Video extends CI_Model {
         return $this->db->insert('videos',$data);
     }
 
-    #edit
+    ##########EDIT
+    ############################
     function edit($id) {
+        //GET Thumbnails
+        $thumbnail = $this->get_thumbnail($_POST['url']);
+        $header = (isset($_POST['header[]'])? 1:0);
+        $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
+        $color = get_main_color($data);
 
+        $data=array (
+            'created'=> $this->now,
+            'updated'=> $this->now,
+            'title' => $_POST['title'],
+            'url' => $_POST['url'],
+            'photo_id'=> $_POST['photo_id'],
+            'header' => $header,
+            'position'=> '0',
+            'language'=> $_POST['language'],
+            'description'=> $_POST['description'],
+            'thumbnail'=> $thumbnail,
+            'r' => $color['r'],
+            'g' => $color['g'],
+            'b' => $color['b']
+        );
+        $this->db->where('id',$id);
+        return $this->db->update('videos', $data);
+    }
+    ##########SORTED
+    ############################
+    function sorted() {
+        foreach($_POST['sort'] as $place => $obj) {
+            $data = array('position' => $place);
+            $this->db->where('id', $obj);
+            $this->db->update('videos', $data);
+        }
+        return true;
     }
 
-    #Get all
+    ##########Get All
+    ############################
     function get_all() {
         $this->db->select('*');
+        $this->db->order_by('position asc, created desc');
         $this->db->from('videos');
         $q = $this->db->get();
 
@@ -76,7 +112,8 @@ class Video extends CI_Model {
         return $q->row();
     }
 
-    #GET Thumbnail Video
+    ##########GET Thumbnail
+    ############################
     function get_thumbnail($url) {
         $this->load->library('upload');
 
@@ -114,9 +151,11 @@ class Video extends CI_Model {
                 file_put_contents($this->photos_path.$filename, file_get_contents($thumbnail));
                 $data['filename']=$filename;
 
-                create_thumbnail($data);
-                create_header($data);
-                unlink( $this->photos_path.$filename);
+                if (autoCrop($data)) {
+                    create_thumbnail($data);
+                    create_header($data);
+                    unlink( $this->photos_path.$filename);
+                }
 
                 return $filename;
             }

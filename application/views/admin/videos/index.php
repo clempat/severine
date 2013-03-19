@@ -9,9 +9,9 @@
 ?>
 <section id="page" class="container-fluid">
     <h2>Liste des Vidéos :</h2>
-    <ul class="thumbnails">
+    <ul class="thumbnails sortable">
         <?php foreach($videos as $video) {?>
-            <li class="span4">
+            <li id="<?php echo $video->id ?>" class="span4 video">
                 <div class="thumbnail" style="background-color: <?php echo 'rgb('.$video->r.','.$video->g.','.$video->b.')' ?>; color: <?php echo text_color($video->r,$video->g,$video->b); ?>">
                     <img src="<?php echo site_url('uploads/thumbs/'.$video->thumbnail).'?'.now()?>" alt="<?php echo $video->title ?>">
                     <p>
