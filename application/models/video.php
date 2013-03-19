@@ -16,12 +16,26 @@ class Video extends CI_Model {
         $this->load->library('image_lib');
 
     }
+    ##########DELETE
+    ############################
+    function dell($id) {
+        //delete FILE
+        $video=$this->get_video($id);
 
+        unlink( $this->photos_path.'thumbs/'.$video->thumbnail);
+        unlink( $this->photos_path.'header/'.$video->thumbnail);
+
+        if($this->db->delete('videos', array('id' => $id))){
+            return true;
+        } else {return false;}
+    }
     #Add Video
     function create() {
         //GET Thumbnails
-        $thumbnail = $this->get_thumbnails($_POST['url']);
+        $thumbnail = $this->get_thumbnail($_POST['url']);
         $header = (isset($_POST['header[]'])? 1:0);
+        $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
+        $color = get_main_color($data);
 
         $data=array (
             'created'=> $this->now,
@@ -33,8 +47,10 @@ class Video extends CI_Model {
             'position'=> '0',
             'language'=> $_POST['language'],
             'description'=> $_POST['description'],
-            'youtube_thumbnail'=> $thumbnail
-
+            'thumbnail'=> $thumbnail,
+            'r' => $color['r'],
+            'g' => $color['g'],
+            'b' => $color['b']
         );
 
 
@@ -49,19 +65,22 @@ class Video extends CI_Model {
 
     }
 
-    #Get Video
-    function get($id) {
-
-    }
-
     #Get all
-    function show() {
+    function get_all() {
+        $this->db->select('*');
+        $this->db->from('videos');
+        $q = $this->db->get();
 
+        return $q->result();
     }
+    function get_video($id) {
+        $q=$this->db->get_where('videos', array('id'=> $id));
 
+        return $q->row();
+    }
 
     #GET Thumbnail Video
-    function get_thumbnails($url) {
+    function get_thumbnail($url) {
         $this->load->library('upload');
 
 
@@ -102,7 +121,7 @@ class Video extends CI_Model {
             $this->create_header($data);
             unlink( $this->photos_path.$filename);
 
-            return $this->photos_path.$filename;
+            return $filename;
         }
 
     }

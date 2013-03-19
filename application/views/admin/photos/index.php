@@ -25,5 +25,5 @@
         </li>
         <?php } ?>
     </ul>
-    <div class="span12 text-right"><a href="photos/add" class="btn btn-primary">Ajoutez une photo</a></div>
+    <div class="span12 text-right"><a href="<?php echo site_url('admin/photos/add') ?>" class="btn btn-primary">Ajoutez une photo</a></div>
 </section>

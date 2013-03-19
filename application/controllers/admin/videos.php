@@ -17,7 +17,13 @@ class Videos extends MY_Controller {
         }
         $this->layout->title("Séverine Lenglet : Videos management");
     }
-
+    function dell($id){
+        if ($this->Video->dell($id)) {
+            redirect('admin/videos', 'refresh');
+        } else {
+            redirect('admin/videos', 'refresh');
+        }
+    }
     function edit($id) {
 
         $this->layout->view('admin/videos/edit');
@@ -27,7 +33,9 @@ class Videos extends MY_Controller {
 
     }
     function index() {
-        $this->layout->view('admin/videos/index');
+        $data['videos']=$this->Video->get_all();
+
+        $this->layout->view('admin/videos/index', $data);
     }
     function add() {
         if ($this->input->post('add')) {

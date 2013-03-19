@@ -11,19 +11,25 @@
     <h2>Liste des Vidéos :</h2>
     <ul class="thumbnails">
         <?php foreach($videos as $video) {?>
+            <?php $thumbnail = ($video->photo_id != 0)? $video->filename : $video->thumbnail ?>
             <li class="span4">
                 <div class="thumbnail" style="background-color: <?php echo 'rgb('.$video->r.','.$video->g.','.$video->b.')' ?>; color: <?php echo text_color($video->r,$video->g,$video->b); ?>">
-                    <img src="<?php echo site_url('uploads/thumbs/'.$video->filename).'?'.now()?>" alt="<?php echo $video->filename ?>">
+                    <img src="<?php echo site_url('uploads/thumbs/'.$thumbnail).'?'.now()?>" alt="<?php echo $video->title ?>">
                     <p>
-                    <h3><?php echo $photo->title ?></h3>
+                    <h3><?php echo $video->title ?></h3>
+                    </p>
+                    <p>
+                    <?php echo $video->description ?>
+                    </p>
+                    <p>
                     <div class="btn-group text-center">
-                        <a href="<?php echo site_url('admin/photos/crop/'.$video->id) ?>" class="btn">Editer</a>
-                        <a href="<?php echo site_url('admin/photos/dell/'.$video->id ) ?>" class="btn btn-danger">Supprimer</a>
+                        <a href="<?php echo site_url('admin/videos/edit/'.$video->id) ?>" class="btn">Editer</a>
+                        <a href="<?php echo site_url('admin/videos/dell/'.$video->id ) ?>" class="btn btn-danger">Supprimer</a>
                     </div>
                     </p>
                 </div>
             </li>
         <?php } ?>
     </ul>
-    <div class="span12 text-right"><a href="photos/add" class="btn btn-primary">Ajoutez une photo</a></div>
+    <div class="span12 text-right"><a href="<?php echo site_url('admin/videos/add') ?>" class="btn btn-primary">Ajoutez une Video</a></div>
 </section>
