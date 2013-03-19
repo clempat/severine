@@ -11,13 +11,13 @@ class Pages extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('User_model');
+        $this->load->model('User');
 
         $this->layout->title( "Séverine Lenglet : Administration");
     }
 
     function index() {
-        if($this->User_model->isLoggedIn()){
+        if($this->User->isLoggedIn()){
             redirect('admin/pages/dashboard','refresh');
 
         } else {
@@ -28,7 +28,7 @@ class Pages extends MY_Controller {
 
     function login() {
         $this->load->library('encrypt');
-        if($this->User_model->isLoggedIn()){
+        if($this->User->isLoggedIn()){
             redirect('admin', 'refresh');
         } else {
             $this->load->library('form_validation');
@@ -42,7 +42,7 @@ class Pages extends MY_Controller {
                 $username = $this->input->post('username');
                 $password = $this->input->post('password');
                 $password = $this->encrypt->sha1($password);
-                $validCredentials= $this->User_model-> validCredentials($username,$password);
+                $validCredentials= $this->User-> validCredentials($username,$password);
 
                 if($validCredentials){
                     redirect('admin', 'refresh');
@@ -56,7 +56,7 @@ class Pages extends MY_Controller {
     }
 
     function dashboard() {
-        if($this->User_model->isLoggedIn()){
+        if($this->User->isLoggedIn()){
             $this->layout->view('admin/admin');
         }
     }

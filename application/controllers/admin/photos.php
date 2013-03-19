@@ -11,20 +11,20 @@ class Photos extends MY_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('User_model');
-        $this->load->model('Photos_model');
-        if(!$this->User_model->isLoggedIn()){
+        $this->load->model('User');
+        $this->load->model('Photo');
+        if(!$this->User->isLoggedIn()){
             redirect ('admin/pages/login', 'refresh');
         }
         $this->layout->title("Séverine Lenglet : Photo upload");
     }
 
     function index() {
-        $data['photos'] = $this->Photos_model->get_all();
+        $data['photos'] = $this->Photo->get_all();
         $this->layout->view('admin/photos/index', $data);
     }
     function dell($id){
-        if ($this->Photos_model->dell($id)) {
+        if ($this->Photo->dell($id)) {
             redirect('admin/photos', 'refresh');
         } else {
             redirect('admin/photos', 'refresh');
@@ -33,9 +33,9 @@ class Photos extends MY_Controller {
     function add()
     {
         if ($this->input->post('upload')) {
-            if ($this->Photos_model->do_upload()) {
-                $id=$this->Photos_model->db->insert_id();
-                if($this->Photos_model->bad_ratio($id)){
+            if ($this->Photo->do_upload()) {
+                $id=$this->Photo->db->insert_id();
+                if($this->Photo->bad_ratio($id)){
                     redirect('admin/photos/crop/'.$id, 'refresh');
                 } else {redirect('admin/photos','refresh');
                 }
@@ -51,14 +51,14 @@ class Photos extends MY_Controller {
     }
     function crop($id) {
         if ($this->input->post('crop_it')){
-            if ($this->Photos_model->do_crop($id)) {
+            if ($this->Photo->do_crop($id)) {
                 redirect('admin/photos', 'refresh');
             } else {
                 redirect('admin/photos/crop/'.$id, 'refresh');
             }
         }
 
-        $photo = $this->Photos_model->get_photo($id);
+        $photo = $this->Photo->get_photo($id);
 
         $data['photo_title'] = $photo->title;
         $data['photo_src'] = 'uploads/'.$photo->filename;

@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class Videos_model extends CI_Model {
+class Video extends CI_Model {
     function __construct()
     {
         parent::__construct();

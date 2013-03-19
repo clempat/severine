@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class Photos_model extends CI_Model {
+class Photo extends CI_Model {
     function __construct()
     {
         parent::__construct();
