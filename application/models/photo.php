@@ -104,6 +104,17 @@ class Photo extends CI_Model {
 
         return $q->row();
     }
+    ##########GET number Photos
+    ############################
+    function get_last($nb) {
+        $this->db->select('*');
+        $this->db->order_by('created', 'desc');
+        $this->db->limit($nb);
+        $this->db->from('photos');
+        $q=$this->db->get();
+
+        return $q->result();
+    }
 
     ##########DO CROP
     ############################
