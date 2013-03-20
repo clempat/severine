@@ -32,8 +32,6 @@
         <div class="form-actions">
             <a href="<?php echo site_url('admin/videos') ?>" class='btn'>Cancel</a>
             <input type="submit" name="valid" id="valid" value="Valider" class="btn btn-primary" />
-
-
         </div>
     <?php echo form_close()?>
 

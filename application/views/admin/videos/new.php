@@ -30,7 +30,8 @@
     </div>
     <?php echo $this->form_builder->hidden('photo_id') ?>
     <div class="form-actions">
-        <?php echo form_submit('add', 'Ajouter'); ?>
+        <a href="<?php echo site_url('admin/videos') ?>" class='btn'>Cancel</a>
+        <input type="submit" name="add" id="add" value="Ajouter" class="btn btn-primary" />
     </div>
     <?php echo form_close()?>
 

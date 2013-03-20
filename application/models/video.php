@@ -15,6 +15,17 @@ class Video extends CI_Model {
         $this->now = date("Y-m-d H:i:s");
         $this->load->library('image_lib');
     }
+    ##########GET number Videos
+    ############################
+    function get_last($nb) {
+        $this->db->select('*');
+        $this->db->order_by('created', 'desc');
+        $this->db->limit($nb);
+        $this->db->from('videos');
+        $q=$this->db->get();
+
+        return $q->result();
+    }
     ##########DELETE
     ############################
     function dell($id) {
@@ -74,7 +85,6 @@ class Video extends CI_Model {
             'url' => $_POST['url'],
             'photo_id'=> $_POST['photo_id'],
             'header' => $header,
-            'position'=> '0',
             'language'=> $_POST['language'],
             'description'=> $_POST['description'],
             'thumbnail'=> $thumbnail,

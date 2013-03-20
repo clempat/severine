@@ -57,7 +57,12 @@ class Pages extends MY_Controller {
 
     function dashboard() {
         if($this->User->isLoggedIn()){
-            $this->layout->view('admin/admin');
+            $this->load->model('Photo');
+            $this->load->model('Video');
+
+            $data['photos']=$this->Photo->get_last(3);
+            $data['videos']=$this->Video->get_last(3);
+            $this->layout->view('admin/admin', $data);
         }
     }
 }
