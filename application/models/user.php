@@ -23,7 +23,7 @@ class User extends CI_Model {
         if ($q->num_rows() >0) {
 
             $r = $q->result();
-            $this->updateData($r);
+            $this->updateData($r[0]);
 
             $session_data = array('username' => $r[0]->username, 'logged_in' => true);
             $this->session->set_userdata($session_data);
