@@ -6,7 +6,7 @@
  * Time: 19:02
  * To change this template use File | Settings | File Templates.
  */
-class Videos extends MY_Controller {
+class Videos extends MY_ADMIN_Controller {
     public function __construct()
     {
         parent::__construct();

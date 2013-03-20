@@ -30,7 +30,10 @@ class Layout {
     function view($view, $data = null, $return = false) {
         // Render template
         $data['content_for_layout'] = $this->obj->load->view($view, $data, true);
+        $data['menu_for_layout'] = $this->obj->load->view($this->menu, $data, true);
+
         $data['title_for_layout'] = $this->title;
+
 
         // Render resources
         $data['js_for_layout'] = '';
@@ -101,6 +104,10 @@ class Layout {
                 $this->block_list[$this->block_new] = ob_get_clean();
             }
         }
+    }
+
+    function menu($file = '') {
+        $this->menu="layout/_".$file;
     }
 
 }

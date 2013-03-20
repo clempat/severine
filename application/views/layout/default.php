@@ -56,29 +56,8 @@
 
 </head>
 <body>
-<nav class="navbar navbar-static-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
+<?php echo $menu_for_layout ?>
 
-            <a class="brand" href="<?php echo site_url()?>"><?php echo img('assets/img/201303121935_logo.png') ?></a>
-            <div class="nav-collapse collapse pull-right">
-                <ul class="nav">
-                    <?php echo menu_link_to('home', 'icon-home') ?>
-                    <?php echo menu_link_to('video', 'icon-film') ?>
-                    <?php echo menu_link_to('print','icon-book') ?>
-                    <?php echo menu_link_to('contact', 'icon-envelope') ?>
-                    <?php echo menu_link_to('about', 'icon-user') ?>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
 <?php echo flash_message() ?>
 <?php echo $content_for_layout?>
 

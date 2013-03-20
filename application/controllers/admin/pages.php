@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class Pages extends MY_Controller {
+class Pages extends MY_ADMIN_Controller {
     public function __construct()
     {
         parent::__construct();
