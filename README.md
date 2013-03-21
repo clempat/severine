@@ -1,4 +1,4 @@
-severine
+Severine
 ========
 
 The application is actually in development : 50%
