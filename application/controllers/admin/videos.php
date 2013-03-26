@@ -35,7 +35,6 @@ class Videos extends MY_ADMIN_Controller {
 
         }
 
-        $this->layout->js('assets/js/videos.js');
         $data['photos'] = $this->Photo->get_all();
         $data["video"]=$this->Video->get_video($id);
         $this->layout->view('admin/videos/edit', $data);

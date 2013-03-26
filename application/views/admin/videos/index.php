@@ -21,7 +21,7 @@
                     <?php echo $video->description ?>
                     </p>
                     <p>
-                    <div class="btn-group text-center">
+                    <div class="btn-group text-center bottom-right">
                         <a href="<?php echo site_url('admin/videos/edit/'.$video->id) ?>" class="btn">Editer</a>
                         <a href="<?php echo site_url('admin/videos/dell/'.$video->id ) ?>" class="btn btn-danger">Supprimer</a>
                     </div>

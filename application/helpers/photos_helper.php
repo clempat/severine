@@ -92,11 +92,11 @@ function get_main_color($photo) {
 }
 
 function text_color($r,$g,$b) {
-    $new_r= (255-$r>127)? 234:51;
-    $new_g= (255-$g>127)? 234:51;
-    $new_b = (255-$b>127)? 234:51;
-
-    $color = "rgb(".$new_r.",".$new_g.",".$new_b.")";
+    $cond_r= (255-$r>127)? 1:0;
+    $cond_g= (255-$g>127)? 1:0;
+    $cond_b = (255-$b>127)? 1:0;
+    $new_rgb = ($cond_r+$cond_g+$cond_b >=2)? 234:51;
+    $color = "rgb(".$new_rgb.",".$new_rgb.",".$new_rgb.")";
 
     return $color;
 }
