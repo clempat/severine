@@ -45,7 +45,7 @@ class Video extends CI_Model {
         //GET Thumbnails
         $thumbnail = $this->get_thumbnail($_POST['url']);
         if ($thumbnail) {
-            $header = (isset($_POST['header[]'])? 1:0);
+            $header = (isset($_POST['header'])? true:false);
             $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
             $color = get_main_color($data);
 
@@ -78,7 +78,7 @@ class Video extends CI_Model {
         //GET Thumbnails
         $thumbnail = $this->get_thumbnail($_POST['url']);
         if ($thumbnail) {
-            $header = (isset($_POST['header[]'])? true:false);
+            $header = (isset($_POST['header'])? true:false);
             $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
             $color = get_main_color($data);
 
