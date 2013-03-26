@@ -44,29 +44,32 @@ class Video extends CI_Model {
     function create() {
         //GET Thumbnails
         $thumbnail = $this->get_thumbnail($_POST['url']);
-        $header = (isset($_POST['header[]'])? 1:0);
-        $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
-        $color = get_main_color($data);
+        if ($thumbnail) {
+            $header = (isset($_POST['header[]'])? 1:0);
+            $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
+            $color = get_main_color($data);
 
-        $data=array (
-            'created'=> $this->now,
-            'updated'=> $this->now,
-            'title' => $_POST['title'],
-            'url' => $_POST['url'],
-            'photo_id'=> $_POST['photo_id'],
-            'header' => $header,
-            'position'=> '0',
-            'language'=> $_POST['language'],
-            'description'=> $_POST['description'],
-            'thumbnail'=> $thumbnail,
-            'r' => $color['r'],
-            'g' => $color['g'],
-            'b' => $color['b']
-        );
+            $data=array (
+                'created'=> $this->now,
+                'updated'=> $this->now,
+                'title' => $_POST['title'],
+                'url' => $_POST['url'],
+                'photo_id'=> $_POST['photo_id'],
+                'header' => $header,
+                'position'=> '0',
+                'language'=> $_POST['language'],
+                'description'=> $_POST['description'],
+                'thumbnail'=> $thumbnail,
+                'r' => $color['r'],
+                'g' => $color['g'],
+                'b' => $color['b']
+            );
 
 
 
-        return $this->db->insert('videos',$data);
+            return $this->db->insert('videos',$data);
+        }
+
     }
 
     ##########EDIT
@@ -74,26 +77,29 @@ class Video extends CI_Model {
     function edit($id) {
         //GET Thumbnails
         $thumbnail = $this->get_thumbnail($_POST['url']);
-        $header = (isset($_POST['header[]'])? 1:0);
-        $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
-        $color = get_main_color($data);
+        if ($thumbnail) {
+            $header = (isset($_POST['header[]'])? true:false);
+            $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
+            $color = get_main_color($data);
 
-        $data=array (
-            'created'=> $this->now,
-            'updated'=> $this->now,
-            'title' => $_POST['title'],
-            'url' => $_POST['url'],
-            'photo_id'=> $_POST['photo_id'],
-            'header' => $header,
-            'language'=> $_POST['language'],
-            'description'=> $_POST['description'],
-            'thumbnail'=> $thumbnail,
-            'r' => $color['r'],
-            'g' => $color['g'],
-            'b' => $color['b']
-        );
-        $this->db->where('id',$id);
-        return $this->db->update('videos', $data);
+            $data=array (
+                'created'=> $this->now,
+                'updated'=> $this->now,
+                'title' => $_POST['title'],
+                'url' => $_POST['url'],
+                'photo_id'=> $_POST['photo_id'],
+                'header' => $header,
+                'language'=> $_POST['language'],
+                'description'=> $_POST['description'],
+                'thumbnail'=> $thumbnail,
+                'r' => $color['r'],
+                'g' => $color['g'],
+                'b' => $color['b']
+            );
+            $this->db->where('id',$id);
+            return $this->db->update('videos', $data);
+        }
+
     }
     ##########SORTED
     ############################
@@ -126,7 +132,7 @@ class Video extends CI_Model {
     ############################
     function get_thumbnail($url) {
         $this->load->library('upload');
-
+        $url_original = $url;
 
         if (parse_url($url)) {
             $url = $this->addhttp($url);
@@ -154,10 +160,36 @@ class Video extends CI_Model {
                     $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$video.php"));
                     $thumbnail = $hash[0]['thumbnail_large'];
                 break;
+                case 'www.mmpro.de':
+                    $this->load->library('simple_html_dom');
+                    $html = file_get_html($url_original);
+                    foreach ($html->find('link[rel=canonical]') as $element){
+                        $canonical_url = $element->href;
+                    }
+                    $canonical_url = $this->addhttp($canonical_url);
+                    $canonical_url = parse_url($canonical_url);
+                    parse_str($canonical_url['query'],$data);
+                    $video_id = $data['videoId'];
+                    $json_url = "http://www.mmpro.de/cache/videolist.json";
+                    $json = file_get_contents($json_url,0,null,null);
+                    $json_output = json_decode($json, true);
+                    foreach ($json_output as $object) {
+                        foreach ($object as $video) {
+                            $video_to_display = $video;
+                            foreach ($video["video"] as $video_data) {
+                                if ($video_data['uri'] == $video_id) break 3;
+                            }
+                        }
+
+                    }
+                   $thumbnail = "http://www.mcfootage.com/imagereplace.php?width=900&height=600&kunde=archive&file=".$video_to_display['picture'];
+
+
+                    break;
             }
             if (isset($thumbnail)) {
                 //UPLOAD THUMBNAILS
-                $filename = $this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
+                $filename = 'import_'.$this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
                 file_put_contents($this->photos_path.$filename, file_get_contents($thumbnail));
                 $data['filename']=$filename;
 
@@ -168,10 +200,8 @@ class Video extends CI_Model {
                 }
 
                 return $filename;
-            }
-            return '';
-
-        }
+            } else {return false;}
+        } else {return false;}
 
     }
 

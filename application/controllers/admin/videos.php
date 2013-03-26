@@ -30,7 +30,7 @@ class Videos extends MY_ADMIN_Controller {
     function edit($id) {
         if ($this->input->post('valid')) {
             if ($this->Video->edit($id)) {
-                redirect('admin/videos', 'refresh');
+                //redirect('admin/videos', 'refresh');
             }
 
         }
