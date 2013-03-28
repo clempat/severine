@@ -4,12 +4,12 @@
   $(document).ready(function() {
     var maxHeight, value;
     maxHeight = 0;
-    $('.thumbnail').each(function() {
+    $('.sortable').find('.thumbnail').each(function() {
       if ($(this).height() + 200 > maxHeight) {
         return maxHeight = $(this).height() + 200;
       }
     });
-    $('.thumbnail').height(maxHeight);
+    $('.sortable').find('.thumbnail').height(maxHeight);
     $('.sortable').sortable({
       stop: function(event, ui) {
         var data, i;

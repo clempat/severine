@@ -18,7 +18,7 @@
     </div>
     <div id="thumbnail_container" class="span12">
         <!-- thumbnail -->
-        <ul class="thumbnails">
+        <ul class="thumbnails h-fix">
             <?php foreach($videos as $video) { ?>
                 <li class="span4" data-id="<?php echo $video->id ?>">
                     <div class="thumbnail">

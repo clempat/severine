@@ -33,8 +33,8 @@ function thumbnail_or_image($videos) {
     }
 
 }
-function video_player($url, $width='', $height='') {
-    $url=addhttp($url);
+function video_player($video_local, $width='', $height='') {
+    $url=addhttp($video_local->url);
     $url_original = $url;
     $url = parse_url($url);
 
@@ -81,11 +81,62 @@ function video_player($url, $width='', $height='') {
                 foreach ($object as $video) {
                     $video_to_display = $video;
                     foreach ($video["video"] as $video_data) {
+                        $video_uri = $video_data['uri'];
                         if ($video_data['uri'] == $video_id) break 3;
                     }
                 }
 
             }
+            if(isset($video_to_display['mcf'])) {
+                $playlist = urlencode('[[JSON]][{"file":"media/archive/'.$video_uri.'_h264midlow.mp4","image":"'.site_url('uploads/header/'.$video_local->thumbnail).'?'.now().'","streamer":"rtmp://streaming.mcfootage.com/ondemand/2800026086","provider":"rtmp"}]');
+            } else {
+                $json_url = "http://www.admiralcloud.com/player/json/".$video_uri;
+                $json = file_get_contents($json_url,0,null,null);
+                $json_output = json_decode($json, false);
+                //LECTURE
+                foreach ($json_output->movies[0]->mp4levels as $level) {
+                    $levels[]=array(
+                        "file"=>$level->src,
+                        "bitrate"=>$level->bitrate,
+                        "width"=>$level->width
+                    );
+                }
+                foreach ($json_output->movies[0]->captions as $caption) {
+                    $captions []= $caption->lang;
+                    $captions_src[] = $caption->src;
+                }
+                if (isset($captions)) {
+                    $captions = implode(",", $captions);
+                    $captions_src = implode(",", $captions_src);
+                } else {
+                    $captions = "";
+                    $captions_src="";
+
+                }
+
+                $new_json = array(
+                    "caption.labels"=>$captions,
+                    "captions.files"=>$captions_src,
+                    "title"=>"Kapitel",
+                    "description"=>"Beschreibung",
+                    "levels"=>$levels,
+                    "image"=> site_url('uploads/header/'.$video_local->thumbnail).'?'.now(),
+                    "provider"=> "rtmp",
+                    "streamer"=> "rtmp://s3a2tcgtacgbig.cloudfront.net/cfx/st/"
+                );
+                $playlist = urlencode('[[JSON]]['.json_encode($new_json).']');
+            }
+            $video_url = urlencode($url_original);
+            $xml = urlencode('http://www.admiralcloud.com/skins/glow/glow.xml');
+            $flashVar= $video_url.'&preload=metadata&id=videoplayer&backcolor=#000000&frontcolor=#ffffff&highcolor=#999999&screencolor=#000000&skin='.$xml.'&playlist='.$playlist.'&controlbar.position=over';
+            $r = "<object type='application/x-shockwave-flash' data='http://www.admiralcloud.com/skins/player510.swf' width='100%' height='100%' bgcolor='#000000' tabindex='0'>";
+            $r .="<param name='allowfullscreen' value='true'>
+                    <param name='allowscriptaccess' value='always'>
+                    <param name='seamlesstabbing' value='true'>
+                    <param name='wmode' value='opaque'>
+                    <param name='flashvars' value='netstreambasepath=$flashVar'></object>";
+            return $r;
+
         break;
         default:
             return '<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Warning!</strong> Unknown problem with the video, contact the webmaster.</div>';

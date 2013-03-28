@@ -8,12 +8,12 @@
  */
 ?>
 <section id="page" class="container-fluid" style="margin-top: 20px;">
-    <div class="span9">
+    <div class="span8">
         <h1><i class="icon-facetime-video"></i> <?php echo $video->title ?></h1>
         <p style="margin-top: 20px;"><?php echo $video->description ?></p>
-        <div class="text-center" style="width: 100%;"><?php echo video_player($video->url);?></div>
+        <div class="video-container" style="width: 100%;"><?php echo video_player($video);?></div>
     </div>
-    <div class="span3">
+    <div class="span3 offset1">
         <div class="well well-small" style="width:100%;">
             <h2 class="text-center"><i class="icon-tags"></i> Tags</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit Integer tincidunt ornare lacus adipiscing Praesent tristique libero tempus nibh sagittis</p>

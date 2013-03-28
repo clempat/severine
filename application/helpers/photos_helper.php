@@ -143,7 +143,7 @@ function autoCrop($photo) {
         $removeBottom += 1;
     }
     $height = imagesy($jpg)-($removeBottom+$removeTop);
-
+    if ($height<0) {$height=imagesy($jpg); $removeTop=0;}
     $CI =& get_instance();
     $config = array (
         'source_image' => $image_path,
@@ -151,6 +151,7 @@ function autoCrop($photo) {
         'height' => $height
 
     );
+
     $CI->image_lib->initialize($config);
     $CI->image_lib->crop();
     return true;

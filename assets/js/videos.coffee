@@ -1,10 +1,11 @@
 $(document).ready ->
+
   #Thumbnail height
   maxHeight = 0
-  $('.thumbnail').each ->
+  $('.sortable').find('.thumbnail').each ->
     maxHeight = $(this).height()+200 if $(this).height()+200 > maxHeight
 
-  $('.thumbnail').height(maxHeight)
+  $('.sortable').find('.thumbnail').height(maxHeight)
 
   $('.sortable').sortable
     stop: (event, ui) ->

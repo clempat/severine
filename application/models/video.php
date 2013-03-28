@@ -172,6 +172,7 @@ class Video extends CI_Model {
 
                     $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$video.php"));
                     $thumbnail = $hash[0]['thumbnail_large'];
+
                 break;
                 case 'www.mmpro.de':
                     $this->load->library('simple_html_dom');
