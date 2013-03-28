@@ -13,6 +13,8 @@ class Videos extends MY_ADMIN_Controller {
         $this->load->model('User');
         $this->load->model('Video');
         $this->load->model('Photo');
+        $this->load->helper('videos');
+
         $this->layout->js('assets/js/videos.js');
 
         if(!$this->User->isLoggedIn()){
@@ -47,15 +49,7 @@ class Videos extends MY_ADMIN_Controller {
     function index() {
 
         $data['videos']=$this->Video->get_all();
-        foreach ($data['videos'] as &$video) {
-            if ($video->photo_id != 0) {
-                $photo = $this->Photo->get_photo($video->photo_id);
-                $video->thumbnail = $photo->filename;
-                $video->r = $photo->r;
-                $video->g = $photo->g;
-                $video->b = $photo->b;
-            }
-        }
+        thumbnail_or_image($data['videos']);
         $this->layout->view('admin/videos/index', $data);
     }
     function add() {

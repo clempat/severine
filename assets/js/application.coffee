@@ -4,6 +4,14 @@
 
 $(document).ready ->
   $('#header_photo').carousel()
+  $('#filter a').click (e) ->
+    $.get($(this).attr('href'), (data) ->
+      $('.thumbnails').quicksand($(data).find('#thumbnail_container li'))
+    )
+    e.preventDefault()
+    $('#filter').find('li').removeClass('active')
+    $(this).parent('li').addClass('active')
+
 
 
 

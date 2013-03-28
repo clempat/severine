@@ -29,7 +29,15 @@ class Layout {
 
     function view($view, $data = null, $return = false) {
         // Render template
-        $data['content_for_layout'] = $this->obj->load->view($view, $data, true);
+        if (is_array($view)) {
+            $data['content_for_layout'] = "";
+            foreach($view as $v){
+                $data['content_for_layout'] .= $this->obj->load->view($v, $data, true);
+            }
+        } else {
+            $data['content_for_layout'] = $this->obj->load->view($view, $data, true);
+        }
+
         $data['menu_for_layout'] = $this->obj->load->view($this->menu, $data, true);
 
         $data['title_for_layout'] = $this->title;
