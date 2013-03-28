@@ -1,4 +1,12 @@
 $(document).ready ->
+
+  #Thumbnail height
+  maxHeight = 0
+  $('.sortable').find('.thumbnail').each ->
+    maxHeight = $(this).height()+200 if $(this).height()+200 > maxHeight
+
+  $('.sortable').find('.thumbnail').height(maxHeight)
+
   $('.sortable').sortable
     stop: (event, ui) ->
       i=0
@@ -21,6 +29,8 @@ $(document).ready ->
 
     unselected: (event, ui) ->
       $(ui.unselected).removeClass "click-selected"
+
+
 
 
 

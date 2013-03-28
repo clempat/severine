@@ -2,7 +2,14 @@
 (function() {
 
   $(document).ready(function() {
-    var value;
+    var maxHeight, value;
+    maxHeight = 0;
+    $('.sortable').find('.thumbnail').each(function() {
+      if ($(this).height() + 200 > maxHeight) {
+        return maxHeight = $(this).height() + 200;
+      }
+    });
+    $('.sortable').find('.thumbnail').height(maxHeight);
     $('.sortable').sortable({
       stop: function(event, ui) {
         var data, i;

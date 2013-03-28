@@ -14,13 +14,26 @@ class Video extends CI_Model {
         $this->photos_path = './uploads/';
         $this->now = date("Y-m-d H:i:s");
         $this->load->library('image_lib');
+
     }
+
     ##########GET number Videos
     ############################
     function get_last($nb) {
         $this->db->select('*');
         $this->db->order_by('created', 'desc');
         $this->db->limit($nb);
+        $this->db->from('videos');
+        $q=$this->db->get();
+
+        return $q->result();
+    }
+    ##########GET Video language
+    ############################
+    function get_language($language) {
+        $this->db->select('*');
+        $this->db->order_by('created', 'desc');
+        $this->db->where('language', $language);
         $this->db->from('videos');
         $q=$this->db->get();
 
@@ -163,6 +176,7 @@ class Video extends CI_Model {
 
                     $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$video.php"));
                     $thumbnail = $hash[0]['thumbnail_large'];
+
                 break;
                 case 'www.mmpro.de':
                     $this->load->library('simple_html_dom');
@@ -207,6 +221,15 @@ class Video extends CI_Model {
             } else {return false;}
         } else {return false;}
 
+    }
+    function get_for_header() {
+        $this->db->select('*');
+        $this->db->order_by('position asc, created desc');
+        $this->db->from('videos');
+        $this->db->where('header', true);
+        $q = $this->db->get();
+
+        return $q->result();
     }
 
     ###PRIVATE FUNCTION
