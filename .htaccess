@@ -1,5 +1,15 @@
-Options +FollowSymLinks
+<IfModule mod_rewrite.c>
+	SetEnv PHP_VER 5_3
+	Options -Indexes
+	Options -Multiviews
+	Options +FollowSymLinks
+	RewriteEngine on
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteCond $1 !^(index\.php|images|robots\.txt|201303251911_sitemap\.xml)
+	RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
 
-RewriteEngine on
-RewriteCond $1 !^(index\.php|assets|uploads|robots\.txt)
-RewriteRule ^(.*)$ index.php/$1 [L]
+<IfModule !mod_rewrite.c>
+	ErrorDocument 404 /index.php
+</IfModule>
