@@ -37,9 +37,12 @@ default_run_options[:pty] = true
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
-
+after "deploy", "deploy:config"
 # If you are using Passenger mod_rails uncomment this:
 namespace :deploy do
+   task :config do
+    upload("application/config/database.php", "/var/www/PhpstormProjects/severine/current/application/config/database.php", via => :scp
+   end
    task :start do ; end
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
