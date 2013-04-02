@@ -21,7 +21,7 @@ class Video extends CI_Model {
     ############################
     function get_last($nb) {
         $this->db->select('*');
-        $this->db->order_by('created', 'desc');
+        $this->db->order_by('position asc, created desc');
         $this->db->limit($nb);
         $this->db->from('videos');
         $q=$this->db->get();
@@ -30,10 +30,11 @@ class Video extends CI_Model {
     }
     ##########GET Video language
     ############################
-    function get_language($language) {
+    function get_language($language,$admin = 'false') {
         $this->db->select('*');
-        $this->db->order_by('created', 'desc');
+        $this->db->order_by('position asc, created desc');
         $this->db->where('language', $language);
+        if(!$admin) {$this->db->where('published', true);}
         $this->db->from('videos');
         $q=$this->db->get();
 
@@ -60,11 +61,13 @@ class Video extends CI_Model {
         if ($thumbnail) {
 
             $header = (isset($_POST['header'])? true:false);
+            $published = (isset($_POST['published'])? true:false);
 
             $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
             $color = get_main_color($data);
 
             $data=array (
+                'published'=> $published,
                 'created'=> $this->now,
                 'updated'=> $this->now,
                 'title' => $_POST['title'],
@@ -95,9 +98,11 @@ class Video extends CI_Model {
         if ($thumbnail) {
             $header = (isset($_POST['header'])? true:false);
             $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
+            $published = (isset($_POST['published'])? true:false);
             $color = get_main_color($data);
 
             $data=array (
+                'published'=> $published,
                 'created'=> $this->now,
                 'updated'=> $this->now,
                 'title' => $_POST['title'],
@@ -129,10 +134,11 @@ class Video extends CI_Model {
 
     ##########Get All
     ############################
-    function get_all() {
+    function get_all($admin=false) {
         $this->db->select('*');
         $this->db->order_by('position asc, created desc');
         $this->db->from('videos');
+        if(!$admin) {$this->db->where('published', true);}
         $q = $this->db->get();
 
         return $q->result();

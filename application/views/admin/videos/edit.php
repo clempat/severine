@@ -12,6 +12,7 @@
 
     <?php echo form_open(site_url('admin/videos/edit/'.$video->id), array('class' => 'form-horizontal')) ?>
         <?php echo $this->form_builder->text('title', 'Titre', $video->title) ?>
+        <?php echo $this->form_builder->checkbox('Publier', 'published', 'true', $video->published) ?>
         <?php echo $this->form_builder->checkbox('Mettre en Header', 'header', 'true', $video->header) ?>
         <?php echo $this->form_builder->textarea('description', 'Description', $video->description) ?>
         <?php echo $this->form_builder->option('language','Langue',array(

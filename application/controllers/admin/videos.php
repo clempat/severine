@@ -37,7 +37,7 @@ class Videos extends MY_ADMIN_Controller {
 
         }
 
-        $data['photos'] = $this->Photo->get_all();
+        $data['photos'] = $this->Photo->get_all($admin=true);
         $data["video"]=$this->Video->get_video($id);
         $this->layout->view('admin/videos/edit', $data);
 
@@ -48,7 +48,7 @@ class Videos extends MY_ADMIN_Controller {
     }
     function index() {
 
-        $data['videos']=$this->Video->get_all();
+        $data['videos']=$this->Video->get_all($admin=true);
         thumbnail_or_image($data['videos']);
         $this->layout->view('admin/videos/index', $data);
     }
@@ -59,7 +59,7 @@ class Videos extends MY_ADMIN_Controller {
             }
 
         }
-        $data['photos'] = $this->Photo->get_all();
+        $data['photos'] = $this->Photo->get_all($admin=true);
         $this->layout->view('admin/videos/new', $data);
     }
 
