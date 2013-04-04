@@ -103,7 +103,6 @@ class Video extends CI_Model {
 
             $data=array (
                 'published'=> $published,
-                'created'=> $this->now,
                 'updated'=> $this->now,
                 'title' => $_POST['title'],
                 'url' => $_POST['url'],
