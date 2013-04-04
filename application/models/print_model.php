@@ -22,7 +22,7 @@ class Print_model extends CI_Model {
             'published'=>$published
         );
         $data = array_merge($_POST, $extra);
-        $this->db->insert('prints',$data);
+        return $this->db->insert('prints',$data);
     }
     public function update($uid) {
         $published = (isset($_POST['published'])? true:false);
@@ -61,5 +61,17 @@ class Print_model extends CI_Model {
             $this->db->update('prints', $data);
         }
         return true;
+    }
+    ##########GET Prints language
+    ############################
+    function get_language($language,$admin = 'false') {
+        $this->db->select('*');
+        $this->db->order_by('position asc, created desc');
+        $this->db->where('language', $language);
+        if(!$admin) {$this->db->where('published', true);}
+        $this->db->from('prints');
+        $q=$this->db->get();
+
+        return $q->result();
     }
 }

@@ -22,5 +22,5 @@
         <?php } ?>
         </ul>
     </div>
-    <div class="span12 text-right" style="margin-top: 20px;"><a href="<?php echo site_url('admin/prints/add') ?>" class="btn btn-primary">Ajoutez une publication</a></div>
+    <div class="span12 text-right" style=""><a href="<?php echo site_url('admin/prints/add') ?>" class="btn btn-primary">Ajoutez une publication</a></div>
 </section>

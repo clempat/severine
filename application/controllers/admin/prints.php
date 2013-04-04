@@ -15,11 +15,11 @@ class Prints extends MY_ADMIN_Controller {
         $this->load->model('Photo');
         $this->load->helper('prints');
         $this->layout->js('assets/js/prints.js');
-
+        $this->layout->js('assets/js/ckeditor/ckeditor.js');
         if(!$this->User->isLoggedIn()){
             redirect ('admin/pages/login', 'refresh');
         }
-        $this->layout->title("Séverine Lenglet : Videos management");
+        $this->layout->title("Séverine Lenglet : Prints management");
     }
     function index(){
         $data['prints'] = $this->Print_model->show($admin=true);

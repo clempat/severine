@@ -18,7 +18,6 @@ function default_or_image($prints) {
             } else {
                 $print->thumbnail = './assets/img/print_no_photo.png';
             }
-            $print->article = $CI->typography->nl2br_except_pre($print->article);
         }
     } else {
         if ($prints->photo_id != 0) {
@@ -27,7 +26,6 @@ function default_or_image($prints) {
         } else {
             $prints->thumbnail = './assets/img/print_no_photo.png';
         }
-        $prints->article = $CI->typography->nl2br_except_pre($prints->article);
     }
 
 }

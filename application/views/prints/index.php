@@ -15,21 +15,21 @@
             <li><a href="<?php echo site_url('prints/french') ?>" data-value="french">French</a></li>
         </ul>
     </div>
-    <div class="span12" style="margin-top: 20px; float: left;">
-        <ul class="media-list">
+
+    <div id="thumbnail_container" class="span12" style="margin-top: 20px; position: relative; float: left;">
+        <ul class="media-list filtered-container">
             <?php foreach($prints as $print) { ?>
-                <li class="media">
-                    <a class="pull-left" href="#">
+                <li class="media" data-id="<?php echo $print->id ?>">
+                    <a class="pull-left" href="<?php echo site_url('prints/view/'.$print->id) ?>">
                         <div class="ribbon-wrapper-green left"><div class="ribbon-green left"><?php echo ucfirst($print->language) ?></div></div>
                         <img src="<?php echo site_url($print->thumbnail)?>" class="hidden-phone"/>
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading blank-phone"><?php echo $print->title ?></h4>
-                        <p><?php echo $print->article ?></p>
+                        <h3 class="media-heading blank-phone"><?php echo $print->title ?></h3>
+                        <?php echo $print->article ?>
                         <div class="bottom">
                             <div class="btn-group text-center">
-                                <a href="<?php echo site_url('admin/prints/edit/'.$print->id) ?>" class="btn">Editer</a>
-                                <a href="<?php echo site_url('admin/prints/dell/'.$print->id ) ?>" class="btn btn-danger">Supprimer</a>
+                                <a href="<?php echo site_url('prints/view/'.$print->id) ?>" class="btn btn-primary">Read now</a>
                             </div>
                         </div>
                     </div>

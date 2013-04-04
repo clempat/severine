@@ -13,7 +13,7 @@
     <?php echo form_open(site_url('admin/prints/edit/'.$print->id), array('class' => 'form-horizontal')) ?>
     <?php echo $this->form_builder->text('title', 'Titre', $print->title) ?>
     <?php echo $this->form_builder->checkbox('Publier', 'published', 'true', $print->published) ?>
-    <?php echo $this->form_builder->textarea('article', 'Article', $print->article) ?>
+    <?php echo $this->form_builder->textarea('article', 'Article', $print->article, 'ckeditor span8') ?>
     <?php echo $this->form_builder->option('language','Langue',array(
         (object) array('id'=>'french', 'name'=>'Français'),
         (object) array('id'=>'english', 'name'=>'Anglais'),

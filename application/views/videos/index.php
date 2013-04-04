@@ -16,9 +16,9 @@
             <li><a href="<?php echo site_url('videos/french') ?>" data-value="french">French</a></li>
         </ul>
     </div>
-    <div id="thumbnail_container" class="span12">
+    <div id="thumbnail_container" class="span12" style="position: relative;">
         <!-- thumbnail -->
-        <ul class="thumbnails h-fix">
+        <ul class="thumbnails h-fix filtered-container">
             <?php foreach($videos as $video) { ?>
                 <li class="span4" data-id="<?php echo $video->id ?>">
                     <div class="thumbnail">

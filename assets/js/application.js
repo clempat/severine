@@ -5,7 +5,7 @@
     $('#header_photo').carousel();
     return $('#filter a').click(function(e) {
       $.get($(this).attr('href'), function(data) {
-        return $('.thumbnails').quicksand($(data).find('#thumbnail_container li'));
+        return $('.filtered-container').quicksand($(data).find('#thumbnail_container li'));
       });
       e.preventDefault();
       $('#filter').find('li').removeClass('active');
