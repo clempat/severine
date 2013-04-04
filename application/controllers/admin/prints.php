@@ -14,6 +14,7 @@ class Prints extends MY_ADMIN_Controller {
         $this->load->model('Print_model');
         $this->load->model('Photo');
         $this->load->helper('prints');
+        $this->layout->js('assets/js/prints.js');
 
         if(!$this->User->isLoggedIn()){
             redirect ('admin/pages/login', 'refresh');
@@ -38,6 +39,10 @@ class Prints extends MY_ADMIN_Controller {
 
     }
     function dell($uid) {
+
+    }
+    function sort() {
+        $this->Print_model->sorted();
 
     }
 }

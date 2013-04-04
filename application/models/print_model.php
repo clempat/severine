@@ -43,4 +43,12 @@ class Print_model extends CI_Model {
 
         return $q->result();
     }
+    function sorted() {
+        foreach($_POST['sort'] as $place => $obj) {
+            $data = array('position' => $place);
+            $this->db->where('id', $obj);
+            $this->db->update('prints', $data);
+        }
+        return true;
+    }
 }

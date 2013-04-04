@@ -1,8 +1,9 @@
 <section id="page" class="container-fluid">
+    <div class="span12 text-right" style="margin-top: 20px;"><a href="<?php echo site_url('admin/prints/add') ?>" class="btn btn-primary">Ajoutez une publication</a></div>
     <div class="span12" style="margin-top: 20px; float: left;">
-        <ul class="media-list">
+        <ul class="media-list sortable">
         <?php foreach($prints as $print) { ?>
-            <li class="media">
+            <li id="<?php echo $print->id ?>" class="media">
                 <a class="pull-left" href="<?php echo site_url('admin/prints/edit/'.$print->id) ?>">
                     <div class="ribbon-wrapper-green left"><div class="ribbon-green left"><?php echo ucfirst($print->language) ?></div></div>
                     <img src="<?php echo site_url($print->thumbnail)?>" class="hidden-phone"/>
@@ -21,5 +22,5 @@
         <?php } ?>
         </ul>
     </div>
-
+    <div class="span12 text-right" style="margin-top: 20px;"><a href="<?php echo site_url('admin/prints/add') ?>" class="btn btn-primary">Ajoutez une publication</a></div>
 </section>
