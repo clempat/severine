@@ -2,3 +2,4 @@ uploads/*.*
 uploads/header/*.*
 uploads/thumbs/*.*
 application/config/database.php
+*.coffee
