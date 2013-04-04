@@ -25,13 +25,24 @@ class Print_model extends CI_Model {
         $this->db->insert('prints',$data);
     }
     public function update($uid) {
+        $published = (isset($_POST['published'])? true:false);
 
+        unset($_POST['valid']);
+        $extra = array(
+            'updated'=>$this->now,
+            'published'=>$published
+        );
+        $data = array_merge($_POST, $extra);
+
+        $this->db->where('id',$uid);
+        return $this->db->update('prints', $data);
     }
     public function delete($uid) {
-
+        return $this->db->delete('prints', array('id' => $uid));
     }
     public function view($uid) {
-
+        $q=$this->db->get_where('prints', array('id'=> $uid));
+        return $q->row();
 
     }
     public function show($admin=false) {
