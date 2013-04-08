@@ -3,3 +3,4 @@ uploads/header/*.*
 uploads/thumbs/*.*
 application/config/database.php
 *.coffee
+config/deploy.rb
