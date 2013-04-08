@@ -17,8 +17,8 @@
             </a>
 
             <a class="brand" href="<?php echo site_url()?>"><?php echo img('assets/img/201303201235_logo.png') ?></a>
-<div class="nav-collapse collapse pull-right">
-    <ul class="nav">
+<div class="nav-collapse collapse">
+    <ul class="nav pull-right">
         <?php echo menu_link_to('home', 'icon-home') ?>
         <?php echo menu_link_to('videos', 'icon-film') ?>
         <?php echo menu_link_to('prints','icon-book') ?>
