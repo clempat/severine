@@ -8,18 +8,41 @@
  */
 ?>
 <section id="page" class="container-fluid" style="margin-top: 20px;">
-    <?php if ($mail_sent === "ok") {?>
-        <div class="alert-box success">Votre message à bien été envoyé ! <a href="" class="close">&times;</a></div>
-    <?php }elseif ($mail_sent === "error"){ ?>
-        <div class="alert-box success">Votre message n'a pas été envoyé, veuillez contacter le webmaster ! <a href="" class="close">&times;</a></div>
+    <?php if ($mail_sent == "ok") {?>
+        <div class="alert alert-success">Your message was correctly sent! <a href="" class="close">&times;</a></div>
+    <?php }elseif ($mail_sent == "error"){ ?>
+        <div class="alert alert-error">Your message could not be sent, please contact the webmaster ! <a href="" class="close">&times;</a></div>
     <?php } ?>
     <div class="span12"><h1><i class="icon-comment"></i> Contact</h1></div>
-    <div class="span8">
-        <form id="contactForm" action="contact" method="POST" class="form-horizontal">
-            <?php echo form_label('<i class="icon-asterisk" style="color:red;"></i> Your email :', 'email', array('required '));?>
-            <?php echo form_input($form['email']);?>
+    <div class="span9">
+        <form id="contactForm" action="contact" method="POST">
+            <?php echo form_label('Your name :', 'firstName');?>
+            <div class="controls controls-row">
+                    <?php echo form_input($form['firstName']);?>
+                    <?php echo form_input($form['name']);?>
+            </div>
+
+            <?php echo form_label('Your telephone :', 'tel');?>
+            <div class="controls">
+                <?php echo form_input($form['tel']);?>
+            </div>
+            <?php echo form_label('<i class="icon-asterisk" style="color:red;"></i> Your email :', 'email');?>
+            <div class="controls">
+                <?php echo form_input($form['email']);?>
+            </div>
+            <?php echo form_label('<i class="icon-asterisk" style="color:red;"></i> Object :', 'object', array('required '));?>
+            <div class="controls">
+                <?php echo form_input($form['object']);?>
+            </div>
+            <?php echo form_label('<i class="icon-asterisk" style="color:red;"></i> Message :', 'msg', array('required '));?>
+            <div class="controls">
+                <?php echo form_textarea($form['msg']);?>
+            </div>
+            <div class="form-actions">
+                <input type="submit" name="q" id="q" class="btn btn-primary" value="Send" />
+            </div>
     </div>
-    <div class="span3 offset1">
+    <div class="span3">
         <div class="well well-small" style="width:100%;">
             <address>
                 <strong>Séverine Lenglet</strong><br/>
@@ -31,11 +54,6 @@
         </div>
 
     </div>
-
-</section>
-<section id="page" class="container-fluid" style="margin-top: 20px;">
-
-
 
 </section>
 

@@ -11,6 +11,8 @@ class contact extends MY_Controller {
     {
         parent::__construct();
         $this->layout->title("Séverine Lenglet : Contact");
+        $this->layout->js("assets/js/jqBootstrapValidation.js");
+        $this->layout->js("assets/js/contact.js");
     }
     public function index()
     {
@@ -18,44 +20,46 @@ class contact extends MY_Controller {
             'name' => 'name',
             'id' => 'name',
             'placeholder' => 'Last Name',
+            'class'=>'span4'
 
         );
         $data['form']['firstName'] = array (
             'name' => 'firstName',
             'id' => 'firstName',
-            'placeholder' => 'First Name'
+            'placeholder' => 'First Name',
+            'class'=>'span4'
         );
         $data['form']['email'] = array (
             'name' => 'email',
             'id' => 'email',
+            'type'=>'email',
             'placeholder' => 'Email',
-            'class'=>'input-block-level'
+            'class'=>'span8',
+            'required' =>''
         );
         $data['form']['object'] = array (
             'name' => 'object',
             'id' => 'object',
-            'placeholder' => 'Object'
+            'placeholder' => 'Object',
+            'class'=>'span8',
+            'required' =>''
         );
         $data['form']['tel'] = array (
             'name' => 'tel',
             'id' => 'tel',
-            'placeholder' => '0000000000'
+            'placeholder' => '0000000000',
+            'class'=>'span4'
         );
         $data['form']['msg'] = array (
             'name' => 'msg',
             'id' => 'msg',
             'rows' => '10',
-        );
-        $data['form']['mySubmit'] = array (
-            'name' => 'q',
-            'value' => 'Send',
-            'class' => 'button'
+            'class' => 'span8',
+            'required' =>''
         );
         $mail_sent = "non";
         if ($this->input->post('q'))
         {
-
-
             $message =nl2br($this->input->post('msg'));
             $this->load->library('email');
             $this->email->from($this->input->post('email', $this->input->post('firstName')." ".$this->input->post('name')));
