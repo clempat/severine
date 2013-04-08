@@ -42,7 +42,7 @@ after "deploy", "deploy:config"
 namespace :deploy do
    task :config do
     top.upload("application/config/database.php", "/var/www/PhpstormProjects/severine/current/application/config/database.php", :via => :scp)
-    run "#{try_sudo} chown -R www-data:www-data /var/www/PhpstormProjects/severine/current/uploads/"
+    run "#{sudo} chown -R www-data:www-data /var/www/PhpstormProjects/severine/current/uploads/"
    end
    task :start do ; end
    task :stop do ; end
