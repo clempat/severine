@@ -14,8 +14,9 @@ class Pages extends MY_Controller {
         {
             show_404();
         }
+
         $data = array();
-        if($page='home'){
+        if($page =='home'){
             $this->load->model('Video');
             $this->load->helper('videos');
             $data['i'] = 0;
@@ -32,7 +33,7 @@ class Pages extends MY_Controller {
         $this->layout->title("Séverine Lenglet : ".ucfirst($page));
 
 
-        if($page='home'){
+        if($page =='home'){
             $this->layout->view(array("pages/home","videos/index"), $data);
         } else {
             $this->layout->view("pages/".$page, $data);

@@ -18,7 +18,7 @@
         <div class="carousel-inner">
             <?php foreach($headers as $header) { ?>
                 <div class="item <?php echo ($j == 0)? 'active':'';?>">
-                    <img src="<?php echo site_url('uploads/header/'.$header->thumbnail).'?'.now()?>" alt="<?php echo $header->title ?>">
+                    <img src="<?php echo site_url('uploads/header/'.$header->thumbnail).'?'.now()?>" alt="<?php echo $header->title ?>" />
                     <a href="<?php echo site_url('videos/view/'.$header->id) ?>" class="btn btn-primary">Watch now</a>
                     <div class="text-header " style="background-color: <?php echo 'rgb('.$header->r.','.$header->g.','.$header->b.')' ?>; color: <?php echo text_color($header->r,$header->g,$header->b); ?>">
                         <h1><?php echo $header->title ?></h1>
