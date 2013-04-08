@@ -1,7 +1,7 @@
 Severine
 ========
 
-The application is actually in development : 50%
+The application is actually in development : 60%
 
 Website for an idependent Journalist with admin dashboard.
 
@@ -11,6 +11,8 @@ Website for an idependent Journalist with admin dashboard.
 - [x] Import Thumbnails from Youtube, Dailymotion and Vimeo
 - [x] Import Thumbnails from MMPRO2
 - [x] Displaying Header/videos
-- [ ] Admin Prints
-- [ ] Dislpaying Prints
+- [X] Admin Prints
+- [X] Dislpaying Prints
 - [ ] Static pages (contact/about)
+- [ ] Tags System
+- [ ] Share System
