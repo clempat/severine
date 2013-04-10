@@ -1,24 +1,9 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: clementpatout
- * Date: 15.03.13
- * Time: 14:38
- * To change this template use File | Settings | File Templates.
- */
-?>
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: clementpatout
- * Date: 12.03.13
- * Time: 15:21
- * To change this template use File | Settings | File Templates.
- */
-?>
 <!DOCTYPE html>
 <html>
 <head>
+    <!--[if lte IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <!-- Descriptive Meta Tags -->
 
@@ -60,7 +45,10 @@
 
 <?php echo flash_message() ?>
 <?php echo $content_for_layout?>
+<footer class="footer">
+    © 2013. Séverine Lenglet, Journalist, Filmmaker, Video Trainer. | All Rights Reserved. | <a href="<?php echo site_url('mentions'); ?>">Mentions.</a>
 
+</footer>
 </body>
 </html>
 

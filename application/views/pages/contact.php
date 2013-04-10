@@ -14,7 +14,7 @@
         <div class="alert alert-error">Your message could not be sent, please contact the webmaster ! <a href="" class="close">&times;</a></div>
     <?php } ?>
     <div class="span12"><h1><i class="icon-comment"></i> Contact</h1></div>
-    <div class="span9">
+    <div class="span8">
         <form id="contactForm" action="contact" method="POST">
             <?php echo form_label('Your name :', 'firstName');?>
             <div class="controls controls-row">
@@ -38,11 +38,11 @@
             <div class="controls">
                 <?php echo form_textarea($form['msg']);?>
             </div>
-            <div class="form-actions">
+            <div class="controls form-actions">
                 <input type="submit" name="q" id="q" class="btn btn-primary" value="Send" />
             </div>
     </div>
-    <div class="span3">
+    <div class="span3 offset1">
         <div class="well well-small" style="width:100%;">
             <address>
                 <strong>Séverine Lenglet</strong><br/>
