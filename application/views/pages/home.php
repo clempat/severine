@@ -18,13 +18,21 @@
         <div class="carousel-inner">
             <?php foreach($headers as $header) { ?>
                 <div class="item <?php echo ($j == 0)? 'active':'';?>">
-                    <img src="<?php echo site_url('uploads/header/'.$header->thumbnail).'?'.now()?>" alt="<?php echo $header->title ?>" />
-                    <a href="<?php echo site_url('videos/view/'.$header->id) ?>" class="btn btn-primary">Watch now</a>
-                    <div class="text-header " style="background-color: <?php echo 'rgb('.$header->r.','.$header->g.','.$header->b.')' ?>; color: <?php echo text_color($header->r,$header->g,$header->b); ?>">
-                        <h1><?php echo $header->title ?></h1>
-                        <div class="p_wrapper">
-                            <p><?php echo $header->description ?></p>
+                    <div class="item-container"  style="background-color: <?php echo 'rgb('.$header->r.','.$header->g.','.$header->b.')' ?>; color: <?php echo text_color($header->r,$header->g,$header->b); ?>">
+                        <div class="blank hide-small"></div>
+                        <div class="picture">
+                            <img src="<?php echo site_url('uploads/header/'.$header->thumbnail).'?'.now()?>" alt="<?php echo $header->title ?>" />
+                            <a href="<?php echo site_url('videos/view/'.$header->id) ?>" class="btn btn-primary watch-now show-small">Watch now</a>
                         </div>
+                        <div class="description hide-small">
+                            <h1><?php echo $header->title ?></h1>
+                            <div class="p_wrapper">
+                                <p><?php echo $header->description ?></p>
+                            </div>
+                            <a href="<?php echo site_url('videos/view/'.$header->id) ?>" class="btn btn-primary watch-now">Watch now</a>
+                        </div>
+
+                        <div class="blank hide-small"></div>
                     </div>
                 </div>
             <?php $j++;} ?>
