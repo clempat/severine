@@ -25,9 +25,10 @@ class Photos extends MY_ADMIN_Controller {
     }
     function dell($id){
         if ($this->Photo->dell($id)) {
-            redirect('admin/photos', 'refresh');
-        } else {
-            redirect('admin/photos', 'refresh');
+            $this->load->model('Video');
+            if($this->Video->dell_photo($id)) {
+                redirect('admin/photos', 'refresh');
+            }
         }
     }
     function add()

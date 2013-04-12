@@ -40,6 +40,7 @@ class Video extends CI_Model {
 
         return $q->result();
     }
+
     ##########DELETE
     ############################
     function dell($id) {
@@ -89,7 +90,13 @@ class Video extends CI_Model {
         }
 
     }
+    ##########DELETE PHOTO
+    ############################
+    function dell_photo($id){
 
+        $this->db->where('photo_id',$id);
+        return $this->db->update('videos', array('photo_id'=>''));
+    }
     ##########EDIT
     ############################
     function edit($id) {
