@@ -17,7 +17,7 @@
             </div>
             <div class="span5">
                 <img src="<?php echo site_url('assets/img/about1.jpg')?>" width="100%" />
-                <p>
+                <p style="margin-top: 50px">
                     Coming from France, I have worked as a journalist and filmmaker for different print media, televisions,
                     institutions and NGOs from all over the world. I produce reports, short films, images films and
                     documentary films in different countries (Europe, India, Nicaragua, Swaziland, Côte d’Ivoire, Ghana…).
