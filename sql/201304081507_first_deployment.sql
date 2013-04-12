@@ -21,7 +21,7 @@ CREATE TABLE prints
     title VARCHAR(255) NOT NULL,
     article LONGTEXT NOT NULL,
     language VARCHAR(100) NOT NULL,
-    published BIT NOT NULL,
+    published BOOLEAN NOT NULL,
     position INT
 );
 CREATE TABLE prints_tags
@@ -60,7 +60,7 @@ CREATE TABLE videos
     title VARCHAR(250),
     url TEXT NOT NULL,
     photo_id INT,
-    header BIT,
+    header BOOLEAN,
     position INT NOT NULL,
     language VARCHAR(100) NOT NULL,
     description LONGTEXT,
@@ -69,7 +69,7 @@ CREATE TABLE videos
     g INT,
     b INT,
     embed LONGTEXT,
-    published BIT DEFAULT 1 NOT NULL
+    published BOOLEAN DEFAULT 1 NOT NULL
 );
 CREATE TABLE videos_tags
 (
