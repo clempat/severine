@@ -8,7 +8,7 @@
  */
 
 class Pages extends MY_Controller {
-    public function view($page='home')
+    public function view($page='home',$offset=0)
     {
         if ( ! file_exists('application/views/pages/'.$page.'.php'))
         {
@@ -26,6 +26,18 @@ class Pages extends MY_Controller {
             thumbnail_or_image($data['headers']);
             $data['videos']= $this->Video->get_all();
             thumbnail_or_image($data['videos']);
+
+            //Pagination
+            $this->load->library('pagination');
+
+            $config['base_url'] = site_url('home');
+            $config['total_rows'] = count($data['videos']);
+            $config['per_page'] = 9;
+            $this->pagination->initialize($config);
+
+            $data["pagination"] = $this->pagination->create_links();
+            $data["videos"] = array_slice($data["videos"],$offset,$config['per_page']);
+
             $this->layout->js('assets/js/jquery.quicksand.js');
         }
 

@@ -62,7 +62,7 @@ class Pages extends MY_ADMIN_Controller {
             $this->load->model('Video');
 
             $data['photos']=$this->Photo->get_last(3);
-            $data['videos']=$this->Video->get_last(3);
+            $data['videos']=$this->Video->get_nb(3);
             thumbnail_or_image($data['videos']);
 
             $this->layout->view('admin/admin', $data);

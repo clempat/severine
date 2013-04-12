@@ -33,6 +33,8 @@
                 </li>
             <?php } ?>
         </ul>
-
+    </div>
+    <div id="pagination" class="pagination pagination-centered">
+        <?php echo $pagination ?>
     </div>
 </section>

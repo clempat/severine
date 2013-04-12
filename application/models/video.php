@@ -19,10 +19,10 @@ class Video extends CI_Model {
 
     ##########GET number Videos
     ############################
-    function get_last($nb) {
+    function get_nb($nb, $from=0) {
         $this->db->select('*');
         $this->db->order_by('position asc, created desc');
-        $this->db->limit($nb);
+        $this->db->limit($nb, $from);
         $this->db->from('videos');
         $q=$this->db->get();
 
