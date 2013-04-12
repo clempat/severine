@@ -12,8 +12,19 @@
 
     <?php echo form_open(site_url('admin/videos/edit/'.$video->id), array('class' => 'form-horizontal')) ?>
         <?php echo $this->form_builder->text('title', 'Titre', $video->title) ?>
-        <?php echo $this->form_builder->checkbox('Publier', 'published', 'true', $video->published) ?>
-        <?php echo $this->form_builder->checkbox('Mettre en Header', 'header', 'true', $video->header) ?>
+        <div class="control-group lesser-inputs ">
+            <label class="control-label" for="">Publier</label>
+            <div class="controls">
+                <label class="checkbox "><input type="checkbox" id="published_published" name="published[]" value="published" rel-value="published" <?php if ($video->published) {echo 'checked="checked"'; } ?>></label>
+            </div>
+        </div>
+        <div class="control-group lesser-inputs ">
+            <label class="control-label" for="">Header</label>
+            <div class="controls">
+                <label class="checkbox "><input type="checkbox" id="header_header" name="header[]" value="header" rel-value="header" <?php if ($video->header) {echo 'checked="checked"'; } ?>></label>
+            </div>
+        </div>
+
         <?php echo $this->form_builder->textarea('description', 'Description', $video->description) ?>
         <?php echo $this->form_builder->option('language','Langue',array(
             (object) array('id'=>'french', 'name'=>'Français'),
