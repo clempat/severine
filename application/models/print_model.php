@@ -54,6 +54,12 @@ class Print_model extends CI_Model {
 
         return $q->result();
     }
+    ##########DELETE PHOTO
+    ############################
+    function dell_photo($id){
+        $this->db->where('photo_id',$id);
+        return $this->db->update('prints', array('photo_id'=>''));
+    }
     function sorted() {
         foreach($_POST['sort'] as $place => $obj) {
             $data = array('position' => $place);
