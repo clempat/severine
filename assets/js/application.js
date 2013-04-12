@@ -24,7 +24,7 @@
             return pagination();
           });
           return $('html, body').animate({
-            scrollTop: $('.filtered-container').offset().top
+            scrollTop: $('.filtered-container').offset().top - 50
           });
         });
         e.preventDefault();
