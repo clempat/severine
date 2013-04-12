@@ -13,6 +13,7 @@ Website for an idependent Journalist with admin dashboard.
 - [x] Displaying Header/videos
 - [X] Admin Prints
 - [X] Dislpaying Prints
-- [ ] Static pages (contact/about)
-- [ ] Tags System
-- [ ] Share System
+- [X] Static pages (contact/about)
+
+Add uploads folder in roots with permissions 777
+
