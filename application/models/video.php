@@ -205,14 +205,24 @@ class Video extends CI_Model {
                         foreach ($object as $video) {
                             $video_to_display = $video;
                             foreach ($video["video"] as $video_data) {
+                                $video_uri = $video_data['uri'];
                                 if ($video_data['uri'] == $video_id) break 3;
                             }
                         }
 
                     }
-                   $thumbnail = "http://www.mcfootage.com/imagereplace.php?width=900&height=600&kunde=archive&file=".$video_to_display['picture'];
+                    if(isset($video_to_display['mcf'])) {
+                        $thumbnail = "http://www.mcfootage.com/imagereplace.php?width=900&height=600&kunde=archive&file=".$video_to_display['picture'];
+                    } else {
+                        $json_url = "http://www.admiralcloud.com/player/json/".$video_uri;
+                        $json = file_get_contents($json_url,0,null,null);
+                        $json_output = json_decode($json, false);
+                        $thumbnail=$json_output->movies[0]->jpg;
+                    }
 
-
+                    break;
+                    default:
+                        echo "Je ne connais pas ce site web... Veuillez vérifier le lien.";
                     break;
             }
             if (isset($thumbnail)) {
