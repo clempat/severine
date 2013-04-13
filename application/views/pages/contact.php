@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
-<section id="page" class="container-fluid" style="margin-top: 20px;">
+<section id="page" class="container" style="margin-top: 20px;">
     <?php if ($mail_sent == "ok") {?>
         <div class="alert alert-success">Your message was correctly sent! <a href="" class="close">&times;</a></div>
     <?php }elseif ($mail_sent == "error"){ ?>

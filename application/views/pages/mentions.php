@@ -6,7 +6,7 @@
  * Time: 14:32
  * To change this template use File | Settings | File Templates.
  */?>
-<section id="page" class="container-fluid" style="margin-top: 20px;">
+<section id="page" class="container" style="margin-top: 20px;">
     <address>
         <strong>Séverine Lenglet</strong><br/>
         Chamissoplatz 4<br />
