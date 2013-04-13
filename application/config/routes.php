@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "pages/view";
 $route['home'] = 'pages/view/home';
+$route['mentions'] = 'pages/view/mentions';
 $route['home/(:num)'] = 'pages/view/home/$1';
 $route['videos/(:num)'] = 'videos/index/$1';
 $route['prints/(:num)'] = 'prints/index/$1';
