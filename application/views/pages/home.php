@@ -21,7 +21,7 @@
                     <div class="item-container"  style="background-color: <?php echo 'rgb('.$header->r.','.$header->g.','.$header->b.')' ?>; color: <?php echo text_color($header->r,$header->g,$header->b); ?>">
                         <div class="blank hide-small"></div>
                         <div class="picture">
-                            <img src="<?php echo site_url('uploads/header/'.$header->thumbnail).'?'.now()?>" alt="<?php echo $header->title ?>" />
+                            <img src="<?php echo site_url('uploads/header/'.$header->thumbnail).'?'.now()?>" alt="<?php echo $header->title ?>" width="704px"/>
                             <a href="<?php echo site_url('videos/view/'.$header->id) ?>" class="btn btn-primary watch-now show-small">Watch now</a>
                         </div>
                         <div class="description hide-small">
