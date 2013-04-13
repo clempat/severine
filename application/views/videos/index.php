@@ -8,15 +8,15 @@
  */
 ?>
 <section id="page" class="container-fluid">
-    <div id="filter" class="span12" style="margin-top: 20px;">
+    <div class="row"><div id="filter" class="span12" style="margin-top: 20px;">
         <ul class="nav nav-pills pull-right">
             <li class="active"><a href="<?php echo site_url('videos') ?>">All</a></li>
             <li><a href="<?php echo site_url('videos/german') ?>" data-value="german">German</a></li>
             <li><a href="<?php echo site_url('videos/english') ?>" data-value="english">English</a></li>
             <li><a href="<?php echo site_url('videos/french') ?>" data-value="french">French</a></li>
         </ul>
-    </div>
-    <div id="thumbnail_container" class="span12" style="position: relative;">
+    </div></div>
+    <div class="row"><div id="thumbnail_container" class="span12" style="position: relative;">
         <!-- thumbnail -->
         <ul class="thumbnails h-fix filtered-container">
             <?php foreach($videos as $video) { ?>
@@ -33,8 +33,8 @@
                 </li>
             <?php } ?>
         </ul>
-    </div>
-    <div id="pagination" class="pagination pagination-centered">
+    </div></div>
+    <div class="row"><div id="pagination" class="span12 pagination pagination-centered">
         <?php echo $pagination ?>
-    </div>
+    </div></div>
 </section>
