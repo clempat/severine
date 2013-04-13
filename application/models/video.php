@@ -174,6 +174,7 @@ class Video extends CI_Model {
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                     $json = curl_exec($ch);
+                    curl_close($ch);
                     $video_data = json_decode($json);
                     $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
 
@@ -185,6 +186,7 @@ class Video extends CI_Model {
                     curl_setopt($ch, CURLOPT_URL, $url);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                     $json = curl_exec($ch);
+                    curl_close($ch);
                     $video_data = json_decode($json);
                     $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
                 break;
