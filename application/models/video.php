@@ -169,14 +169,22 @@ class Video extends CI_Model {
                 case 'www.youtube.com':
                     parse_str($url['query'],$data);
                     $video = $data['v'];
-                    $json = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
+                    $url="https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ";
+                    $ch=curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $json = curl_exec($ch);
                     $video_data = json_decode($json);
                     $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
 
                 break;
                 case 'youtu.be':
                     $video = str_replace('/','',$url['path']);
-                    $json = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
+                    $url="https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ";
+                    $ch=curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $url);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                    $json = curl_exec($ch);
                     $video_data = json_decode($json);
                     $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
                 break;
