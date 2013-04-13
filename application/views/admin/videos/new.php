@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
-<section id="page" class="container-fluid">
+<section id="page" class="container">
     <h2>Ajouter une Vidéo.</h2>
 
     <?php echo form_open(site_url('admin/videos/add'), array('class' => 'form-horizontal')) ?>

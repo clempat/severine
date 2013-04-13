@@ -8,7 +8,7 @@
  */
 ?>
 
-<section id="page" class="container-fluid">
+<section id="page" class="container">
     <h2>Login</h2>
     <?php echo form_open(site_url('admin/pages/login'), array('class' => 'form-horizontal')) ?>
 

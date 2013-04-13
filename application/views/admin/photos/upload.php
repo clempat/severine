@@ -8,7 +8,7 @@
  */
 ?>
 
-<section id="page" class="container-fluid">
+<section id="page" class="container">
     <h2>Ajouter une photo</h2>
     <?php echo form_open_multipart('admin/photos/add', array('class' => 'form-horizontal'));?>
         <fieldset>

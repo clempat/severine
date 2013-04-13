@@ -1,4 +1,4 @@
-<section id="page" class="container-fluid">
+<section id="page" class="container">
     <div class="span12 text-right" style="margin-top: 20px;"><a href="<?php echo site_url('admin/prints/add') ?>" class="btn btn-primary">Ajoutez une publication</a></div>
     <div class="span12" style="margin-top: 20px; float: left;">
         <ul class="media-list sortable">

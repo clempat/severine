@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
-<section id="page" class="container-fluid">
+<section id="page" class="container">
     <h2>Liste des Vidéos :</h2>
     <ul class="thumbnails sortable">
         <?php foreach($videos as $video) {?>
