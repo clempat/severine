@@ -169,11 +169,16 @@ class Video extends CI_Model {
                 case 'www.youtube.com':
                     parse_str($url['query'],$data);
                     $video = $data['v'];
-                    $thumbnail = "http://img.youtube.com/vi/$video/0.jpg";
+                    $json = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
+                    $video_data = json_decode($json);
+                    $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
+
                 break;
                 case 'youtu.be':
-                    $video = $url['path'];
-                    $thumbnail = "http://img.youtube.com/vi$video/0.jpg";
+                    $video = str_replace('/','',$url['path']);
+                    $json = file_get_contents("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
+                    $video_data = json_decode($json);
+                    $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
                 break;
                 case 'www.dailymotion.com':
                     $path = explode('/',$url['path']);
