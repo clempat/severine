@@ -169,8 +169,9 @@ class Video extends CI_Model {
                 case 'www.youtube.com':
                     parse_str($url['query'],$data);
                     $video = $data['v'];
-                    $json=get_json("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
-                    $video_data = json_decode($json);
+                    $video_data = get_json("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
+
+
                     $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
 
                 break;
