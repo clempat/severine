@@ -45,7 +45,7 @@ function create_header($photo, $photos_path= "./uploads/"){
     $CI->image_lib->initialize($config);
     if (!$CI->image_lib->resize())
     {
-        $CI->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $CI->image_lib->display_errors(), 'type' => 'error' ));
+        $CI->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $CI->image_lib->display_errors().'('+$photos_path.$filename.')', 'type' => 'error' ));
         return false;
     } else { return true;}
 }
