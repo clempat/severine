@@ -19,13 +19,13 @@
             <?php foreach($headers as $header) { ?>
                 <div class="item <?php echo ($j == 0)? 'active':'';?>">
                     <div class="item-container"  style="background-color: <?php echo 'rgb('.$header->r.','.$header->g.','.$header->b.')' ?>; color: <?php echo text_color($header->r,$header->g,$header->b); ?>">
-                        
+
                         <div class="picture">
                             <img src="<?php echo site_url('uploads/header/'.$header->thumbnail).'?'.now()?>" alt="<?php echo $header->title ?>" width="100%"/>
                             <a href="<?php echo site_url('videos/view/'.$header->id) ?>" class="btn btn-primary watch-now show-small">Watch now</a>
                         </div>
                         <div class="description hide-small">
-                            <h1><?php echo $header->title ?></h1>
+                            <h2><?php echo $header->title ?></h2>
                             <div class="p_wrapper">
                                 <p><?php echo $header->description ?></p>
                             </div>
