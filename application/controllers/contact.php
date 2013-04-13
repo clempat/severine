@@ -62,6 +62,9 @@ class contact extends MY_Controller {
         {
             $message =nl2br($this->input->post('msg'));
             $this->load->library('email');
+            $config['mailtype'] = 'html';
+            $this->email->initialize($config);
+
             $this->email->from($this->input->post('email', $this->input->post('firstName')." ".$this->input->post('name')));
             $this->email->to('clement.patout@gmail.com');//s_lenglet@yahoo.fr
             $this->email->subject('Demande de contact émanant du site web : '.$this->input->post('object'));
