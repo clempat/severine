@@ -169,24 +169,14 @@ class Video extends CI_Model {
                 case 'www.youtube.com':
                     parse_str($url['query'],$data);
                     $video = $data['v'];
-                    $url="https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ";
-                    $ch=curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    $json = curl_exec($ch);
-                    curl_close($ch);
+                    $json=get_json("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
                     $video_data = json_decode($json);
                     $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
 
                 break;
                 case 'youtu.be':
                     $video = str_replace('/','',$url['path']);
-                    $url="https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ";
-                    $ch=curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $url);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                    $json = curl_exec($ch);
-                    curl_close($ch);
+                    $json=get_json("https://www.googleapis.com/youtube/v3/videos?id=$video&part=snippet&key=AIzaSyBRa_48GW6LpDcB8VlQxrt5alf-4-GTThQ");
                     $video_data = json_decode($json);
                     $thumbnail = $video_data->items[0]->snippet->thumbnails->high->url;
                 break;
@@ -243,7 +233,6 @@ class Video extends CI_Model {
             if (isset($thumbnail)) {
                 //UPLOAD THUMBNAILS
                 $filename = 'import_'.$this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
-                //file_put_contents($this->photos_path.$filename, file_get_contents($thumbnail));
                 grab_image($thumbnail,$this->photos_path.$filename);
                 $data['filename']=$filename;
 
