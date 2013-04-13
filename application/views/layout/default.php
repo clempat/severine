@@ -46,7 +46,7 @@
 <?php echo flash_message() ?>
 <?php echo $content_for_layout?>
 <footer class="footer">
-    © 2013. Séverine Lenglet, Journalist, Filmmaker, Video Trainer. | All Rights Reserved. | <a href="<?php echo site_url('mentions'); ?>">Impressum.</a>
+    © 2013. Séverine Lenglet, Video Journalism, Communication, Media Training. | All Rights Reserved. | <a href="<?php echo site_url('mentions'); ?>">Impressum.</a>
 
 </footer>
 </body>
