@@ -243,7 +243,8 @@ class Video extends CI_Model {
             if (isset($thumbnail)) {
                 //UPLOAD THUMBNAILS
                 $filename = 'import_'.$this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
-                file_put_contents($this->photos_path.$filename, file_get_contents($thumbnail));
+                //file_put_contents($this->photos_path.$filename, file_get_contents($thumbnail));
+                grab_image($thumbnail,$this->photos_path.$filename);
                 $data['filename']=$filename;
 
                 if (autoCrop($data)) {

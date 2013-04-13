@@ -156,3 +156,17 @@ function autoCrop($photo) {
     $CI->image_lib->crop();
     return true;
 }
+function grab_image($url,$saveTo){
+    $ch = curl_init ($url);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+    $raw=curl_exec($ch);
+    curl_close ($ch);
+    if(!file_exists($saveTo)){
+        $fp = fopen($saveTo,'x');
+        fwrite($fp, $raw);
+        fclose($fp);
+    }
+
+}
