@@ -228,7 +228,7 @@ nav .navbar-inner a {
   width: 5%;
 }
 .carousel-inner .item-container .picture {
-  width: 55%;
+  width: 60%;
 }
 .carousel-inner .item-container .description {
   width: 35%;
@@ -236,7 +236,7 @@ nav .navbar-inner a {
   top: 0;
   bottom: 0;
 }
-.carousel-inner .item-container .description h1 {
+.carousel-inner .item-container .description h2 {
   margin-left: 10px;
 }
 .carousel-inner .item-container .description p {
