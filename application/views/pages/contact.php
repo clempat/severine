@@ -42,7 +42,7 @@
                 <input type="submit" name="q" id="q" class="btn btn-primary" value="Send" />
             </div>
     </div>
-    <div class="span3 offset1">
+    <div class="span3">
         <div class="well well-small" style="width:100%;">
             <address>
                 <strong>Séverine Lenglet</strong><br/>
