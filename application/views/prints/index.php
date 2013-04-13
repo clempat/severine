@@ -6,16 +6,16 @@
  * Time: 19:03
  * To change this template use File | Settings | File Templates.
  */?>
-<div id="filter" class="span12" style="margin-top: 20px;">
-    <ul class="nav nav-pills pull-right">
-        <li class="active"><a href="<?php echo site_url('prints') ?>">All</a></li>
-        <li><a href="<?php echo site_url('prints/german') ?>" data-value="german">German</a></li>
-        <li><a href="<?php echo site_url('prints/english') ?>" data-value="english">English</a></li>
-        <li><a href="<?php echo site_url('prints/french') ?>" data-value="french">French</a></li>
-    </ul>
-</div>
-<section id="page" class="container">
 
+<section id="page" class="container">
+    <div id="filter" class="span12" style="margin-top: 20px;">
+        <ul class="nav nav-pills pull-left">
+            <li class="active"><a href="<?php echo site_url('prints') ?>">All</a></li>
+            <li><a href="<?php echo site_url('prints/german') ?>" data-value="german">German</a></li>
+            <li><a href="<?php echo site_url('prints/english') ?>" data-value="english">English</a></li>
+            <li><a href="<?php echo site_url('prints/french') ?>" data-value="french">French</a></li>
+        </ul>
+    </div>
     <div id="thumbnail_container" class="span12" style="margin-top: 20px; position: relative; float: left;">
         <ul class="media-list filtered-container">
             <?php foreach($prints as $print) { ?>
