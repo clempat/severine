@@ -7,8 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
-<section id="page" class="container-fluid">
-    <div class="row"><div id="filter" class="span12" style="margin-top: 20px;">
+<div class="row"><div id="filter" class="span12" style="margin-top: 20px;">
         <ul class="nav nav-pills pull-right">
             <li class="active"><a href="<?php echo site_url('videos') ?>">All</a></li>
             <li><a href="<?php echo site_url('videos/german') ?>" data-value="german">German</a></li>
@@ -16,6 +15,7 @@
             <li><a href="<?php echo site_url('videos/french') ?>" data-value="french">French</a></li>
         </ul>
     </div></div>
+<section id="page" class="container">
     <div class="row"><div id="thumbnail_container" class="span12" style="position: relative;">
         <!-- thumbnail -->
         <ul class="thumbnails h-fix filtered-container">
