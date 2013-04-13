@@ -8,7 +8,7 @@
  */
 ?>
 
-<section id="header" class="container-fluid">
+<section id="header" class="container">
     <div id="header_photo" class="carousel slide">
         <ol class="carousel-indicators">
             <?php foreach($headers as $header) { ?>
