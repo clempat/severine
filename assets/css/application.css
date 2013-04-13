@@ -301,10 +301,14 @@ nav .navbar-inner a {
 */
 #filter {
   float: right;
-  z-index: 10;
 }
 .h-fix .thumbnail {
   height: 450px;
+}
+@media (max-width: 767px) {
+  #thumbnail_container {
+    float: left;
+  }
 }
 .thumbnail {
   -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);

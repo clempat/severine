@@ -100,16 +100,20 @@ nav {
 
 #filter {
   float: right;
-  z-index:10;
 }
 .h-fix .thumbnail {
   height: 450px;
+}
+#thumbnail_container {
+  @media (max-width:767px) {
+    float: left;
+  }
 }
 .thumbnail {
   -webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
   -moz-box-shadow:    0px 0px 8px rgba(0,0,0,0.3);
   box-shadow:         0px 0px 8px rgba(0,0,0,0.3);
-
+  
   overflow: hidden;
   .p_wrapper {
     text-align: justify;
