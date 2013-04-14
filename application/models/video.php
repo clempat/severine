@@ -204,8 +204,7 @@ class Video extends CI_Model {
                     $canonical_url = parse_url($canonical_url);
                     parse_str($canonical_url['query'],$data);
                     $video_id = $data['videoId'];
-                    $json = get_json('http://www.mmpro.de/cache/videolist.json');
-                    $json_output = json_decode($json, true);
+                    $json_output = get_json("http://www.mmpro.de/cache/videolist.json",true);
                     foreach ($json_output as $object) {
                         foreach ($object as $video) {
                             $video_to_display = $video;
@@ -219,8 +218,7 @@ class Video extends CI_Model {
                     if(isset($video_to_display['mcf'])) {
                         $thumbnail = "http://www.mcfootage.com/imagereplace.php?width=900&height=600&kunde=archive&file=".$video_to_display['picture'];
                     } else {
-                        $json = get_json("http://www.admiralcloud.com/player/json/".$video_uri);
-                        $json_output = json_decode($json, false);
+                        $json_output = get_json("http://www.admiralcloud.com/player/json/".$video_uri);
                         $thumbnail=$json_output->movies[0]->jpg;
                     }
 

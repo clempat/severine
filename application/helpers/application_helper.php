@@ -7,7 +7,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function get_json($url) {
+function get_json($url, $assoc=false) {
 
     $ch = curl_init();
 
@@ -18,7 +18,7 @@ function get_json($url) {
     curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
     curl_setopt($ch, CURLOPT_HTTPGET, 1);
     $json = curl_exec($ch);
-    $data = json_decode($json);
+    $data = json_decode($json, $assoc);
     return $data;
 
 }
