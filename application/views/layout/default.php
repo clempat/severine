@@ -38,7 +38,9 @@
 
     <!-- JAVASCRIPT -->
     <?php echo $js_for_layout ?>
-
+    
+    <link rel="shortcut icon" href="<%= image_path('favicon.ico') %>">
+    <link rel="icon" type="image/gif" href="<%= image_path('animated_favicon1.gif') %>">
 </head>
 <body>
 <?php echo $menu_for_layout ?>
