@@ -63,6 +63,7 @@ class Video extends CI_Model {
 
             $header = (isset($_POST['header'])? true:false);
             $published = (isset($_POST['published'])? true:false);
+            $position = (isset($_POST['pull_end']))? $this->get_last_position()+1 : 0;
 
             $data['full_path'] = $this->photos_path.'thumbs/'.$thumbnail;
             $color = get_main_color($data);
@@ -75,7 +76,7 @@ class Video extends CI_Model {
                 'url' => $_POST['url'],
                 'photo_id'=> $_POST['photo_id'],
                 'header' => $header,
-                'position'=> '0',
+                'position'=> $position,
                 'language'=> $_POST['language'],
                 'description'=> $_POST['description'],
                 'thumbnail'=> $thumbnail,
@@ -262,5 +263,13 @@ class Video extends CI_Model {
             $url = "http://" . $url;
         }
         return $url;
+    }
+    private function get_last_position() {
+        $this->db->select_max('position');
+        $query = $this->db->get('videos');
+
+        $result = $query->row();
+
+        return $result->position;
     }
 }

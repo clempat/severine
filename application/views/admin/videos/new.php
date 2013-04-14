@@ -14,6 +14,7 @@
         <?php echo $this->form_builder->text('title', 'Titre') ?>
         <?php echo $this->form_builder->checkbox('Publier', 'published', 'true', true) ?>
         <?php echo $this->form_builder->checkbox('Mettre en Header', 'header', 'true') ?>
+        <?php echo $this->form_builder->checkbox('Mettre fin de liste', 'pull_end', 'true') ?>
         <?php echo $this->form_builder->textarea('description', 'Description') ?>
         <?php echo $this->form_builder->option('language','Langue',array(
         (object) array('id'=>'french', 'name'=>'Français'),

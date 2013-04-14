@@ -15,11 +15,16 @@ class Print_model extends CI_Model {
     }
     public function insert() {
         $published = (isset($_POST['published'])? true:false);
+        $position = (isset($_POST['pull_end']))? $this->get_last_position()+1 : 0;
+
         unset($_POST['add']);
+        unset($_POST['pull_end']);
+
         $extra = array(
             'created'=>$this->now,
             'updated'=>$this->now,
-            'published'=>$published
+            'published'=>$published,
+            'position' => $position
         );
         $data = array_merge($_POST, $extra);
         return $this->db->insert('prints',$data);
@@ -79,5 +84,13 @@ class Print_model extends CI_Model {
         $q=$this->db->get();
 
         return $q->result();
+    }
+    private function get_last_position() {
+        $this->db->select_max('position');
+        $query = $this->db->get('prints');
+
+        $result = $query->row();
+
+        return $result->position;
     }
 }
