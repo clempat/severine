@@ -39,8 +39,8 @@
     <!-- JAVASCRIPT -->
     <?php echo $js_for_layout ?>
     
-    <link rel="shortcut icon" href="<%= image_path('favicon.ico') %>">
-    <link rel="icon" type="image/gif" href="<%= image_path('animated_favicon1.gif') %>">
+    <link rel="shortcut icon" href="<?php echo site_url('assets/img/favicon.ico') ?>">
+    <link rel="icon" type="image/gif" href="<?php echo site_url('assets/img/animated_favicon1.gif') ?>">
 </head>
 <body>
 <?php echo $menu_for_layout ?>
