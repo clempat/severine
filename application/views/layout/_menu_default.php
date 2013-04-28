@@ -20,7 +20,7 @@
 <div class="nav-collapse collapse">
     <ul class="nav pull-right">
         <?php echo menu_link_to('home', 'icon-home') ?>
-        <?php echo menu_link_to('videos', 'icon-film') ?>
+        <?php echo menu_link_to('video', 'icon-film') ?>
         <?php echo menu_link_to('prints','icon-book') ?>
         <?php echo menu_link_to('contact', 'icon-envelope') ?>
         <?php echo menu_link_to('about', 'icon-user') ?>
