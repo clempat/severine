@@ -40,7 +40,7 @@ class Photo extends CI_Model {
     ############################
     function do_upload() {
         $config['upload_path']= $this->photos_path;
-        $config['allowed_types']='gif|jpg|png';
+        $config['allowed_types']='gif|jpg|png|jpeg';
 
         $this->load->library('upload', $config);
 
@@ -138,7 +138,8 @@ class Photo extends CI_Model {
             $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
             return false;
         }
-
+        //CREATE Header
+        create_header($photo);
         //CREATE THUMB
         create_thumbnail($photo);
 
