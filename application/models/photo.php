@@ -120,26 +120,34 @@ class Photo extends CI_Model {
     ############################
     function do_crop($id) {
         $photo = $this->get_photo($id);
-
-        //CROP_Header
         $config = array(
             'source_image'=>$this->photos_path.$photo->filename,
             'new_image'=>$this->photos_path.'header/'.$photo->filename,
+            'maintain_ratio' => TRUE,
+        );
+        $this->image_lib->initialize($config);
+        if (!$this->image_lib->resize()) {
+            $this->session->set_flashdata( 'message', array( 'title' => 'Error Crop2', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
+            return false;
+        }
+
+        //CROP_Header
+        $config = array(
+            'source_image'=>$this->photos_path.'header/'.$photo->filename,
             'x_axis' => $_POST['photo_crop_x'],
             'y_axis' => $_POST['photo_crop_y'],
             'width' => $_POST['photo_crop_w'],
             'height' => $_POST['photo_crop_h'],
-            'quality' => '100%'
+            'quality' => '90%',
+            'maintain_ratio' => false,
         );
         $this->image_lib->initialize($config);
-
         if (!$this->image_lib->crop())
         {
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
+            $this->session->set_flashdata( 'message', array( 'title' => 'Error Crop2', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
             return false;
         }
-        //CREATE Header
-        create_header($photo);
+
         //CREATE THUMB
         create_thumbnail($photo);
 
