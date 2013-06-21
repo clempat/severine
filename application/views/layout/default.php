@@ -41,6 +41,16 @@
     
     <link rel="shortcut icon" href="<?php echo site_url('assets/img/favicon.ico') ?>">
     <link rel="icon" type="image/gif" href="<?php echo site_url('assets/img/animated_favicon1.gif') ?>">
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-41918631-1', 'severinelenglet.eu');
+        ga('send', 'pageview');
+
+    </script>
 </head>
 <body>
 <?php echo $menu_for_layout ?>
@@ -51,16 +61,6 @@
     © 2013. Séverine Lenglet, Video Journalism, Communication, Media Training. | All Rights Reserved. | <a href="<?php echo site_url('mentions'); ?>">Impressum.</a>
 
 </footer>
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-41918631-1', 'severinelenglet.eu');
-    ga('send', 'pageview');
-
-</script>
 </body>
 </html>
 
