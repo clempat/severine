@@ -35,9 +35,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
     <?php echo $css_for_layout ?>
-
-    <!-- JAVASCRIPT -->
-    <?php echo $js_for_layout ?>
     
     <link rel="shortcut icon" href="<?php echo site_url('assets/img/favicon.ico') ?>">
     <link rel="icon" type="image/gif" href="<?php echo site_url('assets/img/animated_favicon1.gif') ?>">
@@ -51,6 +48,9 @@
         ga('send', 'pageview');
 
     </script>
+
+    <!-- JAVASCRIPT -->
+    <?php echo $js_for_layout ?>
 </head>
 <body>
 <?php echo $menu_for_layout ?>
