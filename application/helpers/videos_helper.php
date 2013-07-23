@@ -138,6 +138,17 @@ function video_player($video_local, $width='', $height='') {
             return $r;
 
         break;
+        case 'www.tvbvideo.de':
+            $CI =& get_instance();
+            $CI->load->library('simple_html_dom');
+            $html = file_get_html($url_original);
+
+
+            $r = html_entity_decode($html->find('#export_website_code', 0)->innertext());
+            $r_html = str_get_html($r);
+            $r = $r_html->find('.containerEpix',0)->innertext();
+            return $r;
+            break;
         default:
             return '<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>Warning!</strong> Unknown problem with the video, contact the webmaster.</div>';
         break;

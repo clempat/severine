@@ -74,7 +74,6 @@ class Video extends CI_Model {
                 'updated'=> $this->now,
                 'title' => $_POST['title'],
                 'url' => $_POST['url'],
-                'photo_id'=> $_POST['photo_id'],
                 'header' => $header,
                 'position'=> $position,
                 'language'=> $_POST['language'],
@@ -84,6 +83,9 @@ class Video extends CI_Model {
                 'g' => $color['g'],
                 'b' => $color['b']
             );
+            if (isset($_POST['photo_id']) && !empty($_POST['photo_id'])) {
+                $data['photo_id']= $_POST['photo_id'];
+            }
 
 
 
@@ -114,7 +116,6 @@ class Video extends CI_Model {
                 'updated'=> $this->now,
                 'title' => $_POST['title'],
                 'url' => $_POST['url'],
-                'photo_id'=> $_POST['photo_id'],
                 'header' => $header,
                 'language'=> $_POST['language'],
                 'description'=> $_POST['description'],
@@ -123,6 +124,10 @@ class Video extends CI_Model {
                 'g' => $color['g'],
                 'b' => $color['b']
             );
+            if (isset($_POST['photo_id']) && !empty($_POST['photo_id'])) {
+                $data['photo_id']= $_POST['photo_id'];
+            }
+
             $this->db->where('id',$id);
             return $this->db->update('videos', $data);
         }
@@ -224,11 +229,14 @@ class Video extends CI_Model {
                     }
 
                     break;
+                case 'www.tvbvideo.de':
+                    $thumbnail = "assets/img/nopic.jpg";
+                    break;
                     default:
                         echo "Je ne connais pas ce site web... Veuillez vérifier le lien.";
                     break;
             }
-            if (isset($thumbnail)) {
+            if (isset($thumbnail) && $thumbnail != "assets/img/nopic.jpg" ) {
                 //UPLOAD THUMBNAILS
                 $filename = 'import_'.$this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
                 grab_image($thumbnail,$this->photos_path.$filename);
@@ -241,7 +249,9 @@ class Video extends CI_Model {
                 }
 
                 return $filename;
-            } else {return false;}
+            } else if ($thumbnail == "assets/img/nopic.jpg") {
+                return "nopic.jpg";
+            }else {return false;}
         } else {return false;}
 
     }
