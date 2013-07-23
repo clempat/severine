@@ -11,6 +11,6 @@
     <div class="span10 offset1">
         <h1><i class="icon-facetime-video"></i> <?php echo $video->title ?></h1>
         <p style="margin-top: 20px;"><?php echo $video->description ?></p>
-        <div class="video-container" style="width: 100%;"><?php echo video_player($video);?></div>
+        <div class="video-container" style="width: 100%;"><?php echo $player;?></div>
     </div>
 </section>

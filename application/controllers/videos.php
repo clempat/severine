@@ -70,8 +70,27 @@ class Videos extends MY_Controller {
         $this->layout->view('videos/index',$data);
     }
     public function view($id) {
+        $player = null;
+        $this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
+
+        if ($this->cache->apc->is_supported())
+        {
+            if ($_data = $this->cache->apc->get('VIDEO_PLAYER_'.$id))
+            {
+                $player = $_data;
+            }
+        }
+
         $data['video']=$this->Video->get_video($id);
         thumbnail_or_image($data['video']);
+
+        if (empty($player)) {
+            $data['player'] = video_player($data['video']);
+            $this->cache->apc->save('VIDEO_PLAYER_'.$id,$data['player'], 1339200);
+        } else {
+            $data['player'] = $player;
+        }
+
         $this->layout->view('videos/view', $data);
     }
 }
