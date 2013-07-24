@@ -126,6 +126,8 @@ class Video extends CI_Model {
             );
             if (isset($_POST['photo_id']) && !empty($_POST['photo_id'])) {
                 $data['photo_id']= $_POST['photo_id'];
+            } else {
+                $data['photo_id']= null;
             }
 
             $this->db->where('id',$id);
