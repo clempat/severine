@@ -24,6 +24,7 @@
                     <?php echo menu_link_to('admin/photos', 'icon-camera', 'Photos') ?>
                     <?php echo menu_link_to('admin/videos', 'icon-film', 'Videos') ?>
                     <?php echo menu_link_to('admin/prints','icon-book', 'Prints') ?>
+                    <?php echo menu_link_to('admin/site/about','icon-user', 'About') ?>
                     <?php echo menu_link_to('home', 'icon-eye-open', 'Website') ?>
                 </ul>
             </div>

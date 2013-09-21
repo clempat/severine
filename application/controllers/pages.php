@@ -39,6 +39,9 @@ class Pages extends MY_Controller {
             $data["videos"] = array_slice($data["videos"],$offset,$config['per_page']);
 
             $this->layout->js('assets/js/jquery.quicksand.js');
+        } else if ($page == 'about') {
+            $this->load->model('Site_model');
+            $data['about'] = $this->Site_model->view(1);
         }
 
 
