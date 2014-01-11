@@ -3,3 +3,4 @@ application/config/database.php
 *.coffee
 config/deploy.rb
 .idea/
+atlassian-ide-plugin.xml
