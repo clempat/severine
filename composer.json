@@ -1,0 +1,20 @@
+{
+    "name": "clementpatout/severine",
+    "description": "Severine portfolio website",
+    "authors": [
+        {
+            "name": "Clement Patout",
+            "email": "clement@patout.berlin"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "2.*",
+        "phpmd/phpmd": "2.*",
+        "sebastian/phpcpd": "2.0.*",
+        "pdepend/pdepend": "2.0.*",
+        "phploc/phploc": "2.0.*",
+        "phpunit/phpunit": "4.3.*",
+        "theseer/phpdox": "0.7.*"
+    }
+}
