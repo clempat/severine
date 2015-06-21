@@ -133,9 +133,10 @@ nginx:
                         - 'APP_ENV dev'
                         - 'DB_HOST localhost'
                         - 'DB_USER admin'
-                        - 'DB_PASS 123'
+                        - 'DB_PASSWORD 123'
                         - 'DB_NAME severine'
                         - 'DB_PORT 3306'
+                        - 'DATABASE_URL mysql://admin:123@localhost:3306/severine'
     proxies: {  }
 apache:
     install: '0'

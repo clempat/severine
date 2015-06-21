@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://' . $_SERVER['HTTP_HOST'] . '/';
+$config['base_url']	= 'http://' . getenv('HTTP_HOST') . '/';
 
 /*
 |--------------------------------------------------------------------------
@@ -180,7 +180,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 1;
+$config['log_threshold'] = 2;
 
 /*
 |--------------------------------------------------------------------------

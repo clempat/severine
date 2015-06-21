@@ -5,3 +5,4 @@ config/deploy.rb
 atlassian-ide-plugin.xml
 vendor
 .vagrant
+application/logs
