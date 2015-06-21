@@ -48,13 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-extract(parse_url($_ENV["DATABASE_URL"]));
-
-$db['default']['hostname'] = $host;
-$db['default']['username'] = $user;
-$db['default']['password'] = $pass;
-$db['default']['database'] = substr($path, 1);
-$db['default']['dbdriver'] = 'postgre';
+$db['default']['hostname'] = getenv('DB_HOST');
+$db['default']['username'] = getenv('DB_USER');
+$db['default']['password'] = getenv('DB_PASS');
+$db['default']['database'] = getenv('DB_NAME');
+$db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;

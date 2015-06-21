@@ -4,3 +4,4 @@ config/deploy.rb
 .idea/
 atlassian-ide-plugin.xml
 vendor
+.vagrant
