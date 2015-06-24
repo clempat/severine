@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by JetBrains PhpStorm.
  * User: clementpatout
@@ -6,8 +7,9 @@
  * Time: 10:41
  * To change this template use File | Settings | File Templates.
  */
+class Photo extends CI_Model
+{
 
-class Photo extends CI_Model {
     function __construct()
     {
         parent::__construct();
@@ -18,29 +20,38 @@ class Photo extends CI_Model {
 
     ##########DELETE
     ############################
-    function dell($id) {
+    function dell($id)
+    {
         //delete FILE
-        $photo=$this->get_photo($id);
+        $photo = $this->get_photo($id);
 
-        unlink( $this->photos_path.$photo->filename);
-        unlink( $this->photos_path.'thumbs/'.$photo->filename);
-        unlink( $this->photos_path.'header/'.$photo->filename);
+        unlink($this->photos_path . $photo->filename);
+        unlink($this->photos_path . 'thumbs/' . $photo->filename);
+        unlink($this->photos_path . 'header/' . $photo->filename);
 
-        if($this->db->delete('photos', array('id' => $id))){
+        if ($this->db->delete('photos', array('id' => $id))) {
             return true;
-        } else {return false;}
+        } else {
+            return false;
+        }
     }
     ##########GET ALL
     ############################
-    function get_all() {
-        $q= $this->db->query('SELECT * FROM photos');
+    function get_all()
+    {
+        $q = $this->db->query('SELECT * FROM photos');
+
         return $q->result();
     }
     ##########DO UPLOAD
     ############################
-    function do_upload() {
-        $config['upload_path']= $this->photos_path;
-        $config['allowed_types']='gif|jpg|png|jpeg';
+    function do_upload()
+    {
+        $config['upload_path'] = $this->photos_path;
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $fileNameParsed = explode('.', $_FILES['userfile']['name']);
+        $ext = array_pop($fileNameParsed);
+        $config['file_name'] = implode('.', [slug(implode('.', $fileNameParsed)), $ext]);
 
         $this->load->library('upload', $config);
 
@@ -48,49 +59,57 @@ class Photo extends CI_Model {
             //Get DATA
             $file_data = $this->upload->data();
 
-
-            if ($file_data["image_width"]>900) {
+            if ($file_data["image_width"] > 900) {
                 //RESIZE
-                $config = array (
-                    'source_image' => $file_data['full_path'],
+                $config = array(
+                    'source_image'   => $file_data['full_path'],
                     'maintain_ratio' => true,
-                    'width' => 900,
-                    'height' => 600
-            );
+                    'width'          => 900,
+                    'height'         => 600
+                );
                 $this->image_lib->initialize($config);
-                if (!$this->image_lib->resize()) {return false;}
+                if (!$this->image_lib->resize()) {
+                    return false;
+                }
             }
             // GET COLOR
             $color = get_main_color($file_data);
             //SAVE IN DB
-            $data = array (
-                'title' => humanize($file_data['raw_name']),
-                'filename' => $file_data['file_name'],
-                'origin_width' => $file_data['image_width'],
+            $data = array(
+                'title'         => humanize($file_data['raw_name']),
+                'filename'      => $file_data['file_name'],
+                'origin_width'  => $file_data['image_width'],
                 'origin_height' => $file_data['image_height'],
-                'created' => $this->now,
-                'updated' => $this->now,
-                'type' => $file_data['image_type'],
-                'r' => $color['r'],
-                'g' => $color['g'],
-                'b' => $color['b']
+                'created'       => $this->now,
+                'updated'       => $this->now,
+                'type'          => $file_data['image_type'],
+                'r'             => $color['r'],
+                'g'             => $color['g'],
+                'b'             => $color['b']
             );
             //CREATE Header
             create_header($data);
             //CREATE THUMB
             create_thumbnail($data);
 
-
-            if ($this->db->insert('photos', $data)){
+            if ($this->db->insert('photos', $data)) {
                 return true;
             } else {
-                $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => 'Unexpected Error', 'type' => 'error' ));
+                $this->session->set_flashdata(
+                    'message',
+                    array('title' => 'Error', 'content' => 'Unexpected Error', 'type' => 'error')
+                );
+
                 return false;
             }
 
         } else {
             //ERROR
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error', 'content' => $this->upload->display_errors(), 'type' => 'error' ));
+            $this->session->set_flashdata(
+                'message',
+                array('title' => 'Error', 'content' => $this->upload->display_errors(), 'type' => 'error')
+            );
+
             return false;
             // $this->upload->display_errors();
         }
@@ -99,52 +118,62 @@ class Photo extends CI_Model {
 
     ##########GET PHOTO
     ############################
-    function get_photo($id) {
-        $q=$this->db->get_where('photos', array('id'=> $id));
+    function get_photo($id)
+    {
+        $q = $this->db->get_where('photos', array('id' => $id));
 
         return $q->row();
     }
     ##########GET number Photos
     ############################
-    function get_last($nb) {
+    function get_last($nb)
+    {
         $this->db->select('*');
         $this->db->order_by('created', 'desc');
         $this->db->limit($nb);
         $this->db->from('photos');
-        $q=$this->db->get();
+        $q = $this->db->get();
 
         return $q->result();
     }
 
     ##########DO CROP
     ############################
-    function do_crop($id) {
+    function do_crop($id)
+    {
         $photo = $this->get_photo($id);
         $config = array(
-            'source_image'=>$this->photos_path.$photo->filename,
-            'new_image'=>$this->photos_path.'header/'.$photo->filename,
+            'source_image'   => $this->photos_path . $photo->filename,
+            'new_image'      => $this->photos_path . 'header/' . $photo->filename,
             'maintain_ratio' => TRUE,
         );
         $this->image_lib->initialize($config);
         if (!$this->image_lib->resize()) {
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error Crop2', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
+            $this->session->set_flashdata(
+                'message',
+                array('title' => 'Error Crop2', 'content' => $this->image_lib->display_errors(), 'type' => 'error')
+            );
+
             return false;
         }
 
         //CROP_Header
         $config = array(
-            'source_image'=>$this->photos_path.'header/'.$photo->filename,
-            'x_axis' => $_POST['photo_crop_x'],
-            'y_axis' => $_POST['photo_crop_y'],
-            'width' => $_POST['photo_crop_w'],
-            'height' => $_POST['photo_crop_h'],
-            'quality' => '90%',
+            'source_image'   => $this->photos_path . 'header/' . $photo->filename,
+            'x_axis'         => $_POST['photo_crop_x'],
+            'y_axis'         => $_POST['photo_crop_y'],
+            'width'          => $_POST['photo_crop_w'],
+            'height'         => $_POST['photo_crop_h'],
+            'quality'        => '90%',
             'maintain_ratio' => false,
         );
         $this->image_lib->initialize($config);
-        if (!$this->image_lib->crop())
-        {
-            $this->session->set_flashdata( 'message', array( 'title' => 'Error Crop2', 'content' => $this->image_lib->display_errors(), 'type' => 'error' ));
+        if (!$this->image_lib->crop()) {
+            $this->session->set_flashdata(
+                'message',
+                array('title' => 'Error Crop2', 'content' => $this->image_lib->display_errors(), 'type' => 'error')
+            );
+
             return false;
         }
 
@@ -158,14 +187,23 @@ class Photo extends CI_Model {
     ##########CHECK RATIO
     ############################
 
-    function bad_ratio($id) {
-        $photo= $this->get_photo($id);
+    function bad_ratio($id)
+    {
+        $photo = $this->get_photo($id);
 
-        if (($photo->origin_width)/($photo->origin_height) != 1.5) {
+        if (($photo->origin_width) / ($photo->origin_height) != 1.5) {
             return true;
-        } else {return false;}
+        } else {
+            return false;
+        }
 
+    }
 
+    ##########Update array of Photos
+    ############################
+    function update_all($photos)
+    {
+        return $this->db->update_batch('photos', $photos, 'id');
     }
 
 }

@@ -249,14 +249,14 @@ class Video extends CI_Model {
             }
             if (isset($thumbnail) && $thumbnail != "assets/img/nopic.jpg" ) {
                 //UPLOAD THUMBNAILS
-                $filename = 'import_'.$this->security->sanitize_filename(underscore($_POST['title'])).'.jpg';
+                $filename = 'import_'.slug($_POST['title']).'.jpg';
                 grab_image($thumbnail,$this->photos_path.$filename);
                 $data['filename']=$filename;
 
                 if (autoCrop($data)) {
                     create_thumbnail($data);
                     create_header($data);
-                    unlink( $this->photos_path.$filename);
+                    unlink($this->photos_path.$filename);
                 }
 
                 return $filename;
@@ -366,5 +366,12 @@ class Video extends CI_Model {
         } else {
             return $url;
         }
+    }
+
+    ##########Update array of Photos
+    ############################
+    function update_all($videos)
+    {
+        return $this->db->update_batch('videos', $videos, 'id');
     }
 }
